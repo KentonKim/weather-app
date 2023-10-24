@@ -10,7 +10,7 @@ getData('90630')
     days = resolve.forecast.forecastday
     console.log(days)
     days.forEach(element => {
-      const date = new Date(element.date)
+      const date = new Date(element.date_epoch*1000)
       console.log(date, date.getUTCDate())
     });
   })
