@@ -1,12 +1,15 @@
+import getData from './getData'
 import makeDays from './makeDays'
+import { DateTime } from 'luxon'
 import './style.css'
 
 console.log('hello')
 
-makeDays('90630')
+makeDays('Seoul')
   .then((resolve) => {
     console.log(resolve)
   })
   .catch((error) => {
     console.log(error)
   })
+

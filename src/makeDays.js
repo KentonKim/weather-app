@@ -1,37 +1,38 @@
 import getData from "./getData"
-
-const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-]
-
-const daysShort = [
-    'Sun',
-    'Mon',
-    'Tues',
-    'Wed',
-    'Thur',
-    'Fri',
-    'Sat',
-]
+import { DateTime } from 'luxon'
 
 const getDays = async (location) => {
     const resolve = await getData(location)
-    const epoch = resolve.current.last_updated_epoch * 1000
+    const zone = resolve.location.tz_id
+    console.log(zone)
     const daysForecast = resolve.forecast.forecastday
-    const today = new Date(epoch)
-    let dayNumber = today.getDay();
-    daysForecast.forEach( (day) => {
-        day.dayOfWeek = days[dayNumber]
-        day.dayOfWeekShort = daysShort[dayNumber]
-        dayNumber += 1
-        if (dayNumber == 7) {
-            dayNumber = 0
+    const regex = /^(\d{4})-(\d{2})-(\d{2})$/;
+    daysForecast.forEach( (element) => {
+        const dateStr = element.date 
+        const match = dateStr.match(regex);
+        try {
+            const year = parseInt(match[1], 10);
+            const month = parseInt(match[2], 10);
+            const day = parseInt(match[3], 10);
+            console.log(year,month,day,zone)
+            const dateTime = DateTime.fromObject({
+                year: year,
+                month: month,
+                day: day
+            }, {
+                zone: zone, // Replace with your desired time zone
+            });
+            if (!element.weekday) {
+                element.weekday = dateTime.weekday
+            }
+            if (!element.weekdayLong) {
+                element.weekdayLong = dateTime.weekdayLong
+            }
+            if (!element.weekdayShort) {
+                element.weekdayShort = dateTime.weekdayShort
+            }
+        } catch (error) {
+            console.log(error)
         }
     })
     return daysForecast
