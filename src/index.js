@@ -1,6 +1,4 @@
-import getData from './getData'
 import makeDays from './makeDays'
-import { DateTime } from 'luxon'
 import './style.css'
 
 console.log('hello')
