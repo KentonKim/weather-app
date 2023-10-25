@@ -1,6 +1,6 @@
 import makeDays from './makeDays'
 import nav from './dom/nav'
-import createCard from './dom/card'
+import {createCard, clearCards } from './dom/card'
 import './style.css'
 import mainDom from './dom/main'
 
@@ -15,11 +15,13 @@ form.addEventListener('submit', (event) => {
   event.preventDefault()
   makeDays(forminput.value)
   .then((resolve) => {
+    clearCards(rightmain)
     const data = resolve[0]
     const daysdata = resolve[1]
+    console.log(daysdata)
     
     for (let i = 1; i< daysdata.length; i += 1) {
-      createCard(rightmain)
+      createCard(rightmain, daysdata[i].weekdayLong, `${daysdata[i].day.mintemp_f} / ${daysdata[i].day.maxtemp_f}`)
     }
     console.log(resolve)
 
