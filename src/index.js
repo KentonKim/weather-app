@@ -1,6 +1,8 @@
 import makeDays from './makeDays'
 import nav from './dom/nav'
+import Day from './Day'
 import {createCard, clearCards } from './dom/card'
+import { setTemp, setDay } from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
 
@@ -11,39 +13,30 @@ const navbar = nav(leftmain)
 const form = document.getElementById('search-form')
 const forminput = document.getElementById('search-input')
 
+
+// New location
 form.addEventListener('submit', (event) => {
   event.preventDefault()
+  clearCards(rightmain)
   makeDays(forminput.value)
   .then((resolve) => {
-    clearCards(rightmain)
-    const data = resolve[0]
-    const daysdata = resolve[1]
-    console.log(daysdata)
-    
-    for (let i = 1; i< daysdata.length; i += 1) {
-      createCard(rightmain, daysdata[i].weekdayLong, `${daysdata[i].day.mintemp_f} / ${daysdata[i].day.maxtemp_f}`)
-    }
-    console.log(resolve)
-
-
     forminput.value = ''
+    // const data = resolve[0]
+    const daysdata = resolve[1]
+    const dayArray = []
+    
+    for (let i = 0; i< daysdata.length; i += 1) {
+      dayArray.push(new Day(daysdata[i], createCard(rightmain)))
+    }
+    setTemp(dayArray)
+    setDay(dayArray)
   })
   .catch((error) => {
-    throw new Error(error)
+    if (error.code && error.code === 1006) {
+      // displayNoLocation();
+      console.log('location not found')
+    } else {
+    console.log(error)
+    }
   })
 })
-
-
-
-
-// const cardContainer = document.createElement('div')
-// cardContainer.classList.add('card-container')
-// document.body.appendChild(cardContainer)
-// let weathercard 
-// for (let i = 0; i < 7; i += 1) {
-//   weathercard = card(cardContainer)
-//   if (i == 6) {
-//     console.log(weathercard)
-//     weathercard.classList.add('selected')
-//   }
-// }
