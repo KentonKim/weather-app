@@ -2,14 +2,14 @@ import getData from "./getData"
 import { DateTime } from 'luxon'
 
 const getDays = async (location) => {
-    const resolve = await getData(location)
-    const zone = resolve.location.tz_id
-    const daysForecast = resolve.forecast.forecastday
-    const regex = /^(\d{4})-(\d{2})-(\d{2})$/;
-    daysForecast.forEach( (element) => {
-        const dateStr = element.date 
-        const match = dateStr.match(regex);
-        try {
+    try {
+        const resolve = await getData(location)
+        const zone = resolve.location.tz_id
+        const daysForecast = resolve.forecast.forecastday
+        const regex = /^(\d{4})-(\d{2})-(\d{2})$/;
+        daysForecast.forEach( (element) => {
+            const dateStr = element.date 
+            const match = dateStr.match(regex);
             const year = parseInt(match[1], 10);
             const month = parseInt(match[2], 10);
             const day = parseInt(match[3], 10);
@@ -29,11 +29,11 @@ const getDays = async (location) => {
             if (!element.weekdayShort) {
                 element.weekdayShort = dateTime.weekdayShort
             }
-        } catch (error) {
-            throw new Error(error)
-        }
-    })
+        })
     return [resolve, daysForecast]
+    } catch(error) {
+        throw error
+    }
 }
 
 export default getDays

@@ -5,9 +5,13 @@ const getData = async (location) => {
     try {
         const response = await fetch(string)
         const data = await response.json()
+        if (data.error && data.error.code === 1006) {
+            throw data.error
+        }
         return data
     } catch (error) {
-        throw new Error(error)
+        console.log(error.message)
+        throw error
     }
 }
 
