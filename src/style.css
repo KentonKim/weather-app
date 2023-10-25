@@ -94,8 +94,15 @@ button:focus, input:focus {
     width: 30px;
 }
 
+.temperature {
 
+}
 
+.weekday {
+    display: flex;
+    justify-center: center;
+    align-items: center;
+}
 
 @media (max-width: 800px) {
     /* Your CSS styles for screens with a width less than 600px go here */
