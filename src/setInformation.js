@@ -16,10 +16,10 @@ const setDay = (dayarray) => {
     }
 }
 
-const setTemp = (dayarray) => {
+const setTemp = (dayarray, radioF) => {
 // check condition
     let tempfunc
-    if (true) {
+    if (radioF.checked) {
         tempfunc = (dayElement) => {
             dayElement.displayTempF()
         }

@@ -15,9 +15,9 @@ const [leftmain, rightmain] = mainDom(document.body)
 const navbar = nav(leftmain)
 const form = document.getElementById('search-form')
 const forminput = document.getElementById('search-input')
-toggleCF(navbar)
-
+const [radioC, radioF] = toggleCF(navbar)
 // New location
+const dayArray = []
 form.addEventListener('submit', (event) => {
   event.preventDefault()
   makeDays(forminput.value)
@@ -25,12 +25,11 @@ form.addEventListener('submit', (event) => {
     clearCards(rightmain)
     // const data = resolve[0]
     const daysdata = resolve[1]
-    const dayArray = []
     
     for (let i = 0; i< daysdata.length; i += 1) {
       dayArray.push(new Day(daysdata[i], createCard(rightmain)))
     }
-    setTemp(dayArray)
+    setTemp(dayArray, radioF)
     setDay(dayArray)
   })
   .catch((error) => {
@@ -43,3 +42,10 @@ form.addEventListener('submit', (event) => {
   })
   .finally (() => forminput.value = '')
 })
+
+radioC.onclick = () => {
+  setTemp(dayArray, radioF)
+}
+radioF.onclick = () => {
+  setTemp(dayArray, radioF)
+}
