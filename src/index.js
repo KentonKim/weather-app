@@ -2,11 +2,12 @@ import makeDays from './makeDays'
 import nav from './dom/nav'
 import Day from './Day'
 import {createCard, clearCards } from './dom/card'
-import { setTemp, setDay } from './setInformation'
+import { setTemp, setDay, setIcon } from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
 import showNotification from './showNotification'
 import toggleCF from './dom/toggleCF'
+import displayDay from './dom/displayDay'
 
 // Setup main page
 const [leftmain, rightmain] = mainDom(document.body)
@@ -23,14 +24,18 @@ form.addEventListener('submit', (event) => {
   makeDays(forminput.value)
   .then((resolve) => {
     clearCards(rightmain)
+    console.log(resolve)
     // const data = resolve[0]
     const daysdata = resolve[1]
     
     for (let i = 0; i< daysdata.length; i += 1) {
-      dayArray.push(new Day(daysdata[i], createCard(rightmain)))
+      dayArray.push(new Day(daysdata[i], resolve[0].location, createCard(rightmain)))
     }
     setTemp(dayArray, radioF)
     setDay(dayArray)
+    setIcon(dayArray)
+
+    displayDay(dayArray[0],leftmain)
   })
   .catch((error) => {
     if (error.code && error.code === 1006) {

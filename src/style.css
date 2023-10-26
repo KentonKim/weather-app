@@ -29,13 +29,18 @@ button, input {
     border: 0;
 }
 
-.flex1 {
-    flex: 1;
-}
 
 button:focus, input:focus {
     border: 0;
     outline: none;
+}
+
+#main-left {
+    flex: 2;
+}
+
+#main-right {
+    flex: 1;
 }
 
 #navbar {

@@ -1,5 +1,6 @@
 export default class Day {
-    constructor(object, element) {
+    constructor(object, location, element) {
+        this.location = location
         this.data = object
         this.element = element
         this.tempDiv = element.getElementsByClassName('temperature')[0]
