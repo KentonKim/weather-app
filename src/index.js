@@ -10,11 +10,11 @@ import toggleCF from './dom/toggleCF'
 
 // Setup main page
 const [leftmain, rightmain] = mainDom(document.body)
-const form = document.getElementById('search-form')
-const forminput = document.getElementById('search-input')
 
 // Navbar with search and toggle temperature measurement option
 const navbar = nav(leftmain)
+const form = document.getElementById('search-form')
+const forminput = document.getElementById('search-input')
 toggleCF(navbar)
 
 // New location
