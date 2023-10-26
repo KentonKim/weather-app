@@ -42,6 +42,7 @@ button:focus, input:focus {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding: 10px;
 }
 
 #main-right {
@@ -54,10 +55,24 @@ button:focus, input:focus {
 
 .card {
     height: 120px;
-    flex: 1;
     background-color: var(--grey);
-    display: flex;
     justify-content: space-between;
+    /* border-radius: 20px; */
+    padding: 10px;
+    overflow: clip;
+    display: flex;
+    flex: 1;
+}
+
+.notification {
+    position: fixed;
+    left: calc(50% - 200px);
+    top: 10px;
+    transform: translate(-50%,0);
+    background-color: red;
+    width: min(80%, 400px);
+    text-align: center;
+    user-select: none;
 }
 
 #search-form {
@@ -94,18 +109,35 @@ button:focus, input:focus {
     width: 30px;
 }
 
-.temperature {
-
-}
-
-.weekday {
+.temperature, .weekday {
+    white-space: pre-line;
     display: flex;
-    justify-center: center;
+    flex-flow: column;
+    justify-content: center;
     align-items: center;
 }
 
-@media (max-width: 800px) {
-    /* Your CSS styles for screens with a width less than 600px go here */
+@keyframes slide-in-out {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    15% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+
+@media (max-width: 900px) {
+    /* /* Your CSS styles for screens with a width less than 600px go here */
     body {
         flex-flow: column;
     }

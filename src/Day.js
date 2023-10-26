@@ -9,13 +9,13 @@ export default class Day {
     displayTempF() {
         const maxf = this.data.day.maxtemp_f
         const minf = this.data.day.mintemp_f
-        this.tempDiv.textContent = `HI: ${maxf} \n LOW: ${minf}`
+        this.tempDiv.textContent = `High: ${maxf} \r\n Low: ${minf}`
     }
 
     displayTempC() {
         const maxc = this.data.day.maxtemp_c
         const minc = this.data.day.mintemp_c
-        this.tempDiv.textContent = `HI: ${maxc}\nLOW: ${minc}`
+        this.tempDiv.textContent = `High: ${maxc} \r\n Low: ${minc}`
     }
 
     displayDayLong() {

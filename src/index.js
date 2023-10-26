@@ -5,6 +5,7 @@ import {createCard, clearCards } from './dom/card'
 import { setTemp, setDay } from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
+import showNotification from './showNotification'
 
 console.log('hello')
 
@@ -13,14 +14,12 @@ const navbar = nav(leftmain)
 const form = document.getElementById('search-form')
 const forminput = document.getElementById('search-input')
 
-
 // New location
 form.addEventListener('submit', (event) => {
   event.preventDefault()
-  clearCards(rightmain)
   makeDays(forminput.value)
   .then((resolve) => {
-    forminput.value = ''
+    clearCards(rightmain)
     // const data = resolve[0]
     const daysdata = resolve[1]
     const dayArray = []
@@ -33,10 +32,12 @@ form.addEventListener('submit', (event) => {
   })
   .catch((error) => {
     if (error.code && error.code === 1006) {
-      // displayNoLocation();
+      showNotification('Location not found')
       console.log('location not found')
     } else {
     console.log(error)
     }
   })
+  .finally (() => forminput.value = '')
 })
+
