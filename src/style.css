@@ -45,6 +45,34 @@ button:focus, input:focus {
     padding: 10px;
 }
 
+#toggle-temp-container {
+    display: flex;
+}
+
+#toggle-temp-container > label > input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    /* Not removed via appearance */
+    margin: 0;
+}
+
+#toggle-temp-container > * {
+    color: var(--grey);
+}
+
+#toggle-temp-container > label {
+    cursor: pointer;
+    user-select: none;
+}
+
+#toggle-temp-container > label:has(input[type='radio']:checked) {
+    color: black;
+    cursor: default;
+}
+  
+
 #main-right {
     display: flex;
     flex-flow: column;

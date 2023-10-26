@@ -6,13 +6,16 @@ import { setTemp, setDay } from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
 import showNotification from './showNotification'
+import toggleCF from './dom/toggleCF'
 
-console.log('hello')
-
+// Setup main page
 const [leftmain, rightmain] = mainDom(document.body)
-const navbar = nav(leftmain)
 const form = document.getElementById('search-form')
 const forminput = document.getElementById('search-input')
+
+// Navbar with search and toggle temperature measurement option
+const navbar = nav(leftmain)
+toggleCF(navbar)
 
 // New location
 form.addEventListener('submit', (event) => {
@@ -40,4 +43,3 @@ form.addEventListener('submit', (event) => {
   })
   .finally (() => forminput.value = '')
 })
-
