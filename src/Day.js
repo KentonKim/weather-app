@@ -7,14 +7,14 @@ export default class Day {
     }
 
     displayTempF() {
-        const maxf = this.data.day.maxtemp_f
-        const minf = this.data.day.mintemp_f
+        const maxf = Math.round(this.data.day.maxtemp_f)
+        const minf = Math.round(this.data.day.mintemp_f)
         this.tempDiv.textContent = `High: ${maxf} \r\n Low: ${minf}`
     }
 
     displayTempC() {
-        const maxc = this.data.day.maxtemp_c
-        const minc = this.data.day.mintemp_c
+        const maxc = Math.round(this.data.day.maxtemp_c)
+        const minc = Math.round(this.data.day.mintemp_c)
         this.tempDiv.textContent = `High: ${maxc} \r\n Low: ${minc}`
     }
 
