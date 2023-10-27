@@ -27,7 +27,7 @@ const displayWallpaper = (day,parentDiv) => {
     try {
         const number = getRandNum()
         parentDiv.style.backgroundImage = `url(${weatherPics[number]})`
-        parentDiv.style[background-size] = 'cover'
+        parentDiv.style['background-size'] = 'cover'
     } catch (error) {
         console.log(error)
     }
