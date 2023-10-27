@@ -15,11 +15,9 @@ const setTemp = (day, radioF) => {
 } 
 
 const setDayIcon = (day) => {
-    // weather icon
-    const icon = document.createElement('img')
-    console.log(day.data.day.condition.icon)
-    icon.src = day.data.day.condition.icon
-    day.element.appendChild(icon)
+    day.element.style.backgroundImage = `url(http:${day.data.day.condition.icon})`
+    day.element.style.backgroundPosition = "center"
+    day.element.style.backgroundRepeat = "no-repeat"
 }
 
 export {setDay, setTemp, setDayIcon}
