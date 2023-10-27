@@ -1,37 +1,25 @@
-const setDay = (dayarray) => {
-// check condition
-    let dayfunc
+const setDay = (day) => {
     if (true) {
-        dayfunc = (dayElement) => {
-            dayElement.displayDayLong()
-        }
+        day.displayDayLong()
     } else {
-        dayfunc = (dayElement) => {
-            dayElement.displayDayShort()
-        }
-    }
-
-    for (let i = 0; i < dayarray.length; i += 1) {
-        dayfunc(dayarray[i])
+        day.displayDayShort()
     }
 }
 
-const setTemp = (dayarray, radioF) => {
-// check condition
-    let tempfunc
+const setTemp = (day, radioF) => {
     if (radioF.checked) {
-        tempfunc = (dayElement) => {
-            dayElement.displayTempF()
-        }
+        day.displayTempF()
     } else {
-        tempfunc = (dayElement) => {
-            dayElement.displayTempC()
-        }
-    }
-
-    for (let i = 0; i < dayarray.length; i += 1) {
-        tempfunc(dayarray[i])
+        day.displayTempC()
     }
 } 
 
-export {setDay, setTemp}
+const setDayIcon = (day) => {
+    // weather icon
+    const icon = document.createElement('img')
+    console.log(day.data.day.condition.icon)
+    icon.src = day.data.day.condition.icon
+    day.element.appendChild(icon)
+}
+
+export {setDay, setTemp, setDayIcon}

@@ -2,7 +2,7 @@ import makeDays from './makeDays'
 import * as nav from './dom/nav'
 import Day from './Day'
 import {createCard, clearCards } from './dom/card'
-import { setTemp, setDay} from './setInformation'
+import { setTemp, setDay, setDayIcon} from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
 import showNotification from './showNotification'
@@ -30,8 +30,12 @@ form.addEventListener('submit', (event) => {
     for (let i = 0; i< daysdata.length; i += 1) {
       dayArray.push(new Day(daysdata[i], resolve[0].location, createCard(rightmain)))
     }
-    setTemp(dayArray, radioF)
-    setDay(dayArray)
+
+    dayArray.map((element) => {
+      setDayIcon(element)
+      setTemp(element, radioF)
+      setDay(element)
+    })
 
     displayWallpaper(dayArray[0],document.body)
   })
