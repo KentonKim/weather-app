@@ -3,7 +3,7 @@
 
 * {
     background-color: transparent;
-    border: 1px solid blueviolet;
+    /* border: 1px solid blueviolet; */
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -51,30 +51,22 @@ button:focus, input:focus {
 
 #navbar {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     gap: 20px;
-    align-items: baseline;
-    padding-top: 10px;
-    padding-left: 20px;
+    align-items: center;
+    padding: 10px 20px;
 }
 
 #toggle-temp-container {
-    background-color: var(--transparent-light);
-    border-radius: 15px;
-    padding: 3px;
+    height: 40px;
+    background-color: var(--transparent-light-light);
+    border-radius: 20px;
+    padding: 0 8px;
     display: flex;
+    gap: 3px;
     justify-content: center;
     align-items: baseline;
     overflow: clip;
-}
-
-#toggle-temp-container > label > input[type="radio"] {
-    /* Add if not using autoprefixer */
-    -webkit-appearance: none;
-    appearance: none;
-    /* For iOS < 15 to remove gradient background */
-    /* Not removed via appearance */
-    margin: 0;
 }
 
 #toggle-temp-container > * {
@@ -86,13 +78,22 @@ button:focus, input:focus {
     user-select: none;
 }
 
+#toggle-temp-container > label > input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    /* Not removed via appearance */
+    margin: 0;
+}
+
 #toggle-temp-container > label:has(input[type='radio']:checked) {
     color: aliceblue;
     cursor: default;
 }
   
 
-#main-right {
+.card-container {
     display: flex;
     flex-flow: column;
     padding: 10px;
