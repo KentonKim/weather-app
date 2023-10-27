@@ -3,7 +3,7 @@
 
 * {
     background-color: transparent;
-    /* border: 1px solid blueviolet; */
+    border: 1px solid blueviolet;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -13,6 +13,10 @@
 :root {
     font-size: medium;
     --grey: gray;
+    --transparent-light-light: rgba(0,0,0,0.2);
+    --transparent-light: rgba(0,0,0,0.4);
+    --transparent-med: rgba(0,0,0,0.6);
+    --transparent-dark: rgba(0,0,0,0.7);
 }
 
 body, html {
@@ -49,13 +53,19 @@ button:focus, input:focus {
     display: flex;
     justify-content: start;
     gap: 20px;
-    align-items: center;
+    align-items: baseline;
     padding-top: 10px;
     padding-left: 20px;
 }
 
 #toggle-temp-container {
+    background-color: var(--transparent-light);
+    border-radius: 15px;
+    padding: 3px;
     display: flex;
+    justify-content: center;
+    align-items: baseline;
+    overflow: clip;
 }
 
 #toggle-temp-container > label > input[type="radio"] {
@@ -101,7 +111,7 @@ button:focus, input:focus {
     display: flex;
     flex: 1;
     overflow: hidden;
-  background: rgba(0, 0, 0, 0.4); /* Adjust the last value (0.5) to control the darkness */
+    background-color: var(--transparent-light);
     -webkit-transition: all 0.1s ease;
     -moz-transition: all 0.1s ease;
     -o-transition: all 0.1s ease;
@@ -110,15 +120,15 @@ button:focus, input:focus {
 }
 
 .card:hover {
-    background: rgba(0, 0, 0, 0.6); /* Adjust the last value (0.5) to control the darkness */
+    background-color: var(--transparent-med);
 }
 
 .card:active {
-    background: rgba(0, 0, 0, 0.7); /* Adjust the last value (0.5) to control the darkness */
+    background-color: var(--transparent-dark);
 }
 
 .card.selected {
-    background: rgba(0, 0, 0, 0.7); /* Adjust the last value (0.5) to control the darkness */
+    background-color: var(--transparent-dark);
 }
 
 .notification {
@@ -126,7 +136,7 @@ button:focus, input:focus {
     left: calc(50% - 200px);
     top: 10px;
     transform: translate(-50%,0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--transparent-light);
     width: min(80%, 400px);
     text-align: center;
     user-select: none;
@@ -135,7 +145,6 @@ button:focus, input:focus {
 #search-form {
     width: 360px;
     height: 40px;
-    border: 1px solid var(--grey);
     border-radius: 25px;
     overflow: clip;
     display: flex;
@@ -143,12 +152,12 @@ button:focus, input:focus {
     padding: 8px;
     padding-left: 1rem;
     margin: 0;
-  background: rgba(0, 0, 0, 0.2); /* Adjust the last value (0.5) to control the darkness */
+    background-color: var(--transparent-light-light);
 }
 
 #search-input {
     height: 100%;
-    border-bottom: 1px solid var(--grey);
+    border-bottom: 1px solid var(--transparent-light-light);
     flex: 1;
     /* margin-left: 15px; */
     padding-bottom: 3px;
