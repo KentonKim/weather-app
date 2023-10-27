@@ -1,9 +1,9 @@
-import getData from "./getData"
+import { getWeatherData } from "./getData"
 import { DateTime } from 'luxon'
 
 const getDays = async (location) => {
     try {
-        const resolve = await getData(location)
+        const resolve = await getWeatherData(location)
         const zone = resolve.location.tz_id
         const daysForecast = resolve.forecast.forecastday
         const regex = /^(\d{4})-(\d{2})-(\d{2})$/;

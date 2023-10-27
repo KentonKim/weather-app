@@ -7,7 +7,7 @@ import './style.css'
 import mainDom from './dom/main'
 import showNotification from './showNotification'
 import toggleCF from './dom/toggleCF'
-import displayDay from './dom/displayDay'
+import displayWallpaper from './dom/displayWallpaper'
 
 // Setup main page
 const [leftmain, rightmain] = mainDom(document.body)
@@ -34,7 +34,7 @@ form.addEventListener('submit', (event) => {
     setTemp(dayArray, radioF)
     setDay(dayArray)
 
-    displayDay(dayArray[0],leftmain)
+    displayWallpaper(dayArray[0],document.body)
   })
   .catch((error) => {
     if (error.code && error.code === 1006) {
