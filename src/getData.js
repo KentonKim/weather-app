@@ -1,6 +1,7 @@
 import weatherapi from "./weatherapi"
+import { unsplashApi, unsplashSecretApi } from "./unsplashapi"
 
-const getData = async (location) => {
+const getWeatherData = async (location) => {
     const string = `https://api.weatherapi.com/v1/forecast.json?key=${weatherapi()}&q=${location}&days=7`
     try {
         const response = await fetch(string)
@@ -15,4 +16,9 @@ const getData = async (location) => {
     }
 }
 
-export default getData
+const getUnsplashData = async (weather) => {
+    const string = `${unsplashApi()}`
+
+}
+
+export {getWeatherData, getUnsplashData }
