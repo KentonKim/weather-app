@@ -34,14 +34,4 @@ const setTemp = (dayarray, radioF) => {
     }
 } 
 
-const setIcon = (dayarray) => {
-    console.log('hello from seticon')
-    dayarray.map((element) => {
-        element.element.style.backgroundImage = `url(http:${element.data.day.condition.icon})`
-        element.element.style.backgroundPosition = "center"
-        element.element.style.backgroundRepeat = "no-repeat"
-        // element.element.style.backgroundSize= "cover"
-    })
-}
-
-export {setDay, setTemp, setIcon}
+export {setDay, setTemp}

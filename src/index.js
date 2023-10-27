@@ -2,7 +2,7 @@ import makeDays from './makeDays'
 import nav from './dom/nav'
 import Day from './Day'
 import {createCard, clearCards } from './dom/card'
-import { setTemp, setDay, setIcon } from './setInformation'
+import { setTemp, setDay} from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
 import showNotification from './showNotification'
@@ -33,7 +33,6 @@ form.addEventListener('submit', (event) => {
     }
     setTemp(dayArray, radioF)
     setDay(dayArray)
-    setIcon(dayArray)
 
     displayDay(dayArray[0],leftmain)
   })
