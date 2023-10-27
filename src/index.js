@@ -1,22 +1,21 @@
 import makeDays from './makeDays'
-import nav from './dom/nav'
+import * as nav from './dom/nav'
 import Day from './Day'
 import {createCard, clearCards } from './dom/card'
 import { setTemp, setDay} from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
 import showNotification from './showNotification'
-import toggleCF from './dom/toggleCF'
 import displayWallpaper from './dom/displayWallpaper'
 
 // Setup main page
 const [leftmain, rightmain] = mainDom(document.body)
 
 // Navbar with search and toggle temperature measurement option
-const navbar = nav(leftmain)
-const form = document.getElementById('search-form')
+const navbar = nav.initNav(leftmain)
+const form = nav.navbar(navbar)
 const forminput = document.getElementById('search-input')
-const [radioC, radioF] = toggleCF(navbar)
+const [radioC, radioF] = nav.navToggleTemp(navbar)
 // New location
 const dayArray = []
 form.addEventListener('submit', (event) => {
