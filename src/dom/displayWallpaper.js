@@ -20,31 +20,17 @@ const snowyPics = [Snowy1, Snowy2, Snowy3, Snowy4]
 const cloudyPics = [Cloudy1, Cloudy2, Cloudy3, Cloudy4]
 const rainyPics = [Rainy1, Rainy2, Rainy3, Rainy4]
 
-const displayDay = (day,parentDiv) => {
-
-    // weather icon
+const displayWallpaper = (day,parentDiv) => {
     const weatherCode = day.data.day.condition.code
     const weatherPics = determineWallpaper(weatherCode) 
 
-    while (true) {
-        console.log('while loop')
-        try {
-            parentDiv.style.backgroundImage = weatherPics[getRandNum()]
-            console.log(document.body.style.backgroundImage)
-            break
-        } catch (error) {
-            console.log(error)
-            break
-        }
+    try {
+        const number = getRandNum()
+        parentDiv.style.backgroundImage = `url(${weatherPics[number]})`
+        parentDiv.style[background-size] = 'cover'
+    } catch (error) {
+        console.log(error)
     }
-
-    // info about location
-
-    // info about wind speed and direction
-
-
-    // graph on hourly temperature
-
     return
 }
 
@@ -70,7 +56,7 @@ const determineWallpaper = (condition) => {
 }
 
 const getRandNum = () => {
-    return Math.ceil(Math.random()*4)
+    return Math.floor(Math.random()*4)
 } 
 
-export default displayDay
+export default displayWallpaper 
