@@ -12,8 +12,8 @@ import displayWallpaper from './dom/displayWallpaper'
 const [leftmain, rightmain] = mainDom(document.body)
 
 // Navbar with search and toggle temperature measurement option
-const navbar = nav.initNav(leftmain)
-const form = nav.navbar(navbar)
+const navbar = nav.initNavbar(leftmain)
+const form = nav.navForm(navbar)
 const forminput = document.getElementById('search-input')
 const [radioC, radioF] = nav.navToggleTemp(navbar)
 // New location

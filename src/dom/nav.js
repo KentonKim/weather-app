@@ -1,13 +1,13 @@
 import searchIcon from "../icons/search.svg"
 
-const initNav = (parentDiv) => {
+const initNavbar = (parentDiv) => {
     const element = document.createElement('div')
     element.id = 'navbar'
     parentDiv.appendChild(element)
     return element 
 }
 
-const navbar = (parentDiv) => {
+const navForm = (parentDiv) => {
     const form = document.createElement('form')
     form.id = 'search-form'
     const input = document.createElement('input')
@@ -56,4 +56,4 @@ const navToggleTemp = (parentDiv) => {
 }
 
 
-export {initNav, navbar, navToggleTemp} 
+export {initNavbar, navForm, navToggleTemp} 
