@@ -3,6 +3,7 @@ import {setDOM, setTemp} from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
 import searchLocation from './searchLocation'
+import { initContainers } from './dom/content'
 
 // Setup main page
 const [leftmain, rightmain] = mainDom(document.body)
@@ -32,3 +33,5 @@ radioF.onclick = () => dayArray.map((dayObj) => setDOM(dayObj.tempDiv, setTemp, 
 // 4. output day data in dom
 
 // a. add units to setinformation 
+
+initContainers(leftmain)

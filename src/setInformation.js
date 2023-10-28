@@ -1,3 +1,11 @@
+const setDOM = (element, func, argsArray) => {
+    element.classList.add('hidden')
+    setTimeout(() => {
+        func.apply(null, argsArray)
+        element.classList.remove('hidden')
+    }, 200);
+}
+
 const setDay = (day) => {
     if (true) {
         day.displayDayLong()
@@ -20,12 +28,16 @@ const setDayIcon = (day) => {
     day.element.style.backgroundRepeat = "no-repeat"
 }
 
-const setDOM = (element, func, argsArray) => {
-    element.classList.add('hidden')
-    setTimeout(() => {
-        func.apply(null, argsArray)
-        element.classList.remove('hidden')
-    }, 200);
+const setContent = (day) => {
+    // set icon
 }
 
-export {setDOM, setDay, setTemp, setDayIcon}
+const setTab = (day) => {
+    // displays temp / precipitation / wind hourly
+}
+
+
+
+
+
+export {setDOM, setDay, setTemp, setDayIcon, setContent}
