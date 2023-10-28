@@ -7,8 +7,8 @@ import displayWallpaper from './dom/displayWallpaper'
 
 const searchLocation = async (forminput, cardContainer, radioF) => {
   const dayArray = []
-  const resolve = await makeDays(forminput.value)
   try {
+    const resolve = await makeDays(forminput.value)
     // Clear Prior
     clearCards(cardContainer)
 
