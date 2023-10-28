@@ -1,7 +1,7 @@
 import {createCard, clearCards } from './dom/card'
 import Day from './Day'
 import makeDays from './makeDays'
-import { setTemp, setDay, setDayIcon} from './setInformation'
+import {setDOM, setDay, setDayIcon, setTemp} from './setInformation'
 import showNotification from './showNotification'
 import displayWallpaper from './dom/displayWallpaper'
 
@@ -19,10 +19,10 @@ const searchLocation = async (forminput, cardContainer, radioF) => {
       dayArray.push(new Day(daysdata[i], resolve[0].location, createCard(cardContainer)))
     }
 
-    dayArray.map((element) => {
-      setDayIcon(element)
-      setTemp(element, radioF)
-      setDay(element)
+    dayArray.map((dayObj) => {
+      setDOM(dayObj.element, setDayIcon, [dayObj])
+      setDOM(dayObj.tempDiv, setTemp, [dayObj, radioF])
+      setDOM(dayObj.dayDiv, setDay, [dayObj])
     })
 
     displayWallpaper(dayArray[0],document.body)

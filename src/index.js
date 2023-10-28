@@ -1,5 +1,5 @@
 import * as nav from './dom/nav'
-import { setTemp, setDay, setDayIcon} from './setInformation'
+import {setDOM, setTemp} from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
 import searchLocation from './searchLocation'
@@ -14,6 +14,7 @@ const forminput = document.getElementById('search-input')
 const [radioC, radioF] = nav.navToggleTemp(navbar)
 
 const dayArray = []
+
 // New location
 form.addEventListener('submit', async (event) => {
   event.preventDefault()
@@ -21,7 +22,13 @@ form.addEventListener('submit', async (event) => {
   arr.map( (element) => dayArray.push(element))
 })
 
+radioC.onclick = () => dayArray.map((dayObj) => setDOM(dayObj.tempDiv, setTemp, [dayObj, radioF]))
+radioF.onclick = () => dayArray.map((dayObj) => setDOM(dayObj.tempDiv, setTemp, [dayObj, radioF]))
 
-radioC.onclick = () => dayArray.map((element) => setTemp(element, radioF))
-radioF.onclick = () => dayArray.map((element) => setTemp(element, radioF))
+// display main page
+// 1. select day
+// 2. access day data
+// 3. get day data
+// 4. output day data in dom
 
+// a. add units to setinformation 

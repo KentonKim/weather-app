@@ -44,6 +44,8 @@ button:focus, input:focus {
 
 #main-left {
     flex: 4;
+    display: flex;
+    flex-flow: column;
 }
 
 #main-right {
@@ -72,6 +74,7 @@ button:focus, input:focus {
 
 #toggle-temp-container > * {
     color: var(--grey);
+    transition: color 0.15s ease-in-out;
 }
 
 #toggle-temp-container > label {
@@ -188,6 +191,11 @@ button:focus, input:focus {
     flex-flow: column;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.temperature.hidden, .weekday.hidden {
+    opacity: 0;
 }
 
 @keyframes slide-in-out {
