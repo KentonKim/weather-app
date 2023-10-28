@@ -17,6 +17,7 @@ const navForm = (parentDiv) => {
     button.id = "search-button"
     const image = new Image()
     image.src = searchIcon 
+    image.id = 'search-icon'
 
     button.appendChild(image)
     form.appendChild(input)

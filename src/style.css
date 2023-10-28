@@ -17,6 +17,7 @@
     --transparent-light: rgba(0,0,0,0.4);
     --transparent-med: rgba(0,0,0,0.6);
     --transparent-dark: rgba(0,0,0,0.7);
+    --font-white: aliceblue;
 }
 
 body, html {
@@ -156,9 +157,13 @@ button:focus, input:focus {
     background-color: var(--transparent-light-light);
 }
 
+#search-icon {
+    filter: invert(96%) sepia(47%) saturate(7073%) hue-rotate(179deg) brightness(110%) contrast(106%);
+}
+
 #search-input {
     height: 100%;
-    border-bottom: 1px solid var(--transparent-light-light);
+    border-bottom: 1px solid var(--font-white);
     flex: 1;
     /* margin-left: 15px; */
     padding-bottom: 3px;
