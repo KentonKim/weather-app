@@ -5,10 +5,10 @@ import { setTemp, setDay, setDayIcon} from './setInformation'
 import showNotification from './showNotification'
 import displayWallpaper from './dom/displayWallpaper'
 
-const searchLocation = (forminput, cardContainer, radioF) => {
+const searchLocation = async (forminput, cardContainer, radioF) => {
   const dayArray = []
-  makeDays(forminput.value)
-  .then((resolve) => {
+  const resolve = await makeDays(forminput.value)
+  try {
     // Clear Prior
     clearCards(cardContainer)
 
@@ -26,14 +26,15 @@ const searchLocation = (forminput, cardContainer, radioF) => {
     })
 
     displayWallpaper(dayArray[0],document.body)
-  })
-  .catch((error) => {
+  } catch(error) {
     if (error.code && error.code === 1006) {
       showNotification('Location not found')
     }
     console.log(error)
-  })
-  .finally (() => forminput.value = '')
+  } finally {
+    forminput.value = ''
+  }
+
   return dayArray
 }
 

@@ -15,10 +15,12 @@ const [radioC, radioF] = nav.navToggleTemp(navbar)
 
 const dayArray = []
 // New location
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', async (event) => {
   event.preventDefault()
-  dayArray.concat(searchLocation(forminput, rightmain, radioF))
+  const arr = await searchLocation(forminput, rightmain, radioF)
+  arr.map( (element) => dayArray.push(element))
 })
+
 
 radioC.onclick = () => dayArray.map((element) => setTemp(element, radioF))
 radioF.onclick = () => dayArray.map((element) => setTemp(element, radioF))
