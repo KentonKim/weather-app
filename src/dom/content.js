@@ -6,6 +6,7 @@ const initContainers = (parentDiv) => {
 
     const topDiv = document.createElement('div')
     topDiv.id = "content-top"
+    topDiv.textContent = 'hello'
 
     const bottomDiv = document.createElement('div')
     bottomDiv.id = "content-bottom"
