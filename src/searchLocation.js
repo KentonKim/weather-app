@@ -26,6 +26,7 @@ const searchLocation = async (forminput, cardContainer, radioF) => {
     })
 
     displayWallpaper(dayArray[0],document.body)
+    console.log(dayArray)
   } catch(error) {
     if (error.code && error.code === 1006) {
       showNotification('Location not found')

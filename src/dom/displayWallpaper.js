@@ -36,7 +36,6 @@ const displayWallpaper = (day,parentDiv) => {
 
 const determineWallpaper = (condition) => {
     // const sunnyarray = [1000, 1003]
-    console.log(condition)
     const rainyarray = [1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189,
                         1192, 1195, 1198, 1201, 1240, 1243, 1246, 1249,
                         1273, 1276]
@@ -46,16 +45,16 @@ const determineWallpaper = (condition) => {
                         1222, 1225, 1237, 1252, 1255, 1258, 1261, 1264, 1279,
                         1282]
     if (rainyarray.includes(condition)) { // rainy 
-        console.log('rainy')
+        // console.log('rainy')
         return rainyPics
     } else if (cloudyarray.includes(condition)) { // cloudy
-        console.log('cloudy')
+        // console.log('cloudy')
         return cloudyPics
     } else if (snowyarray.includes(condition)) { // snowy
-        console.log('snowy')
+        // console.log('snowy')
         return snowyPics
     } else { // sunny
-        console.log('sunny or default')
+        // console.log('sunny or default')
         return sunnyPics 
     }     
 }
