@@ -3,7 +3,7 @@
 
 * {
     background-color: transparent;
-    border: 1px solid blueviolet;
+    /* border: 1px solid blueviolet; */
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -19,6 +19,7 @@
     --transparent-dark: rgba(0,0,0,0.7);
     --font-white: aliceblue;
 }
+
 
 body, html {
     width: 100%;
@@ -37,7 +38,6 @@ body {
 button, input {
     border: 0;
 }
-
 
 button:focus, input:focus {
     border: 0;
@@ -164,6 +164,31 @@ button:focus, input:focus {
 
 #horz-scroll-tabs {
     height: 40px;
+    display: flex;
+}
+
+.tab-button {
+    height: 100%;
+    color: var(--font-white);
+    margin: 0;
+    padding: 0 10px;
+    border-radius: 10px 10px 0 0;
+    transition: background-color 0.15s ease;
+}
+
+.tab-button:hover {
+    color: var(--font-white);
+    background-color: var(--transparent-light-light);
+}
+
+/* .tab-button:active {
+    color: var(--font-white);
+    background-color: var(--transparent-light-lightlight);
+} */
+
+.tab-button:focus {
+    color: var(--font-white);
+    background-color: var(--transparent-light);
 }
 
 #horz-scroll {
@@ -177,6 +202,7 @@ button:focus, input:focus {
 
 .hour-card {
     width: 120px;
+    background-color: var(--transparent-light);
 }
 
 /* Right side */
@@ -211,11 +237,11 @@ button:focus, input:focus {
     user-select: none;
 }
 
-.card:hover, .card.selected {
+.card:hover {
     background-color: var(--transparent-med);
 }
 
-.card:active {
+.card:active, .card.selected {
     background-color: var(--transparent-dark);
 }
 
