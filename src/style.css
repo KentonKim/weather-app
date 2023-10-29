@@ -8,6 +8,7 @@
     padding: 0;
     margin: 0;
     color: aliceblue;
+    user-select: none;
 }
 
 :root {
@@ -18,6 +19,9 @@
     --transparent-med: rgba(0,0,0,0.6);
     --transparent-dark: rgba(0,0,0,0.7);
     --font-white: aliceblue;
+    --transition-fast: 0.1s;
+    --transition-med: 0.15s;
+    --transition-slow: 0.2s;
 }
 
 
@@ -76,12 +80,11 @@ button:focus, input:focus {
 
 #toggle-temp-container > * {
     color: var(--grey);
-    transition: color 0.15s ease-in-out;
+    transition: color var(--transition-med) ease-in-out;
 }
 
 #toggle-temp-container > label {
     cursor: pointer;
-    user-select: none;
 }
 
 #toggle-temp-container > label > input[type="radio"] {
@@ -149,10 +152,40 @@ button:focus, input:focus {
     display: flex;
     flex-flow: column;
     border-radius: 20px;
+    overflow: clip;
 }
 
 #content-top {
     flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: start;
+}
+
+#main-icon {
+}
+
+#location-info {
+    display: flex;
+    flex-flow: column;
+}
+
+#location-name {
+    font-size: xx-large;
+}
+
+#location-country {
+    font-size: medium;
+    flex: 1;
+    margin-top: -10px;
+}
+
+#main-temperature {
+    font-size: 64px;
+    margin-left: auto;
+    margin-right: 15px;
+    margin-top: -10px;
+    transition: all var(--transition-slow) ease;
 }
 
 #content-bottom {
@@ -173,7 +206,7 @@ button:focus, input:focus {
     margin: 0;
     padding: 0 10px;
     border-radius: 10px 10px 0 0;
-    transition: background-color 0.15s ease;
+    transition: background-color var(--transition-med) ease;
 }
 
 .tab-button:hover {
@@ -226,15 +259,14 @@ button:focus, input:focus {
     flex: 1;
     overflow: hidden;
     background-color: var(--transparent-light);
-    -webkit-transition: all 0.1s ease;
-    -moz-transition: all 0.1s ease;
-    -o-transition: all 0.1s ease;
-    -ms-transition: all 0.1s ease;
-    transition: all 0.1s ease-in-out;
+    -webkit-transition: all var(--transition-fast) ease;
+    -moz-transition: all var(--transition-fast) ease;
+    -o-transition: all var(--transition-fast) ease;
+    -ms-transition: all var(--transition-fast) ease;
+    transition: all var(--transition-fast) ease-in-out;
 }
 
 .card, .card > * {
-    user-select: none;
 }
 
 .card:hover {
@@ -253,7 +285,6 @@ button:focus, input:focus {
     background-color: var(--transparent-light);
     width: min(80%, 400px);
     text-align: center;
-    user-select: none;
 }
 
 .temperature, .weekday {
@@ -265,7 +296,7 @@ button:focus, input:focus {
     transition: all 0.2s ease-in-out;
 }
 
-.temperature.hidden, .weekday.hidden {
+.hidden{
     opacity: 0;
 }
 

@@ -1,8 +1,9 @@
 const setDOM = (element, func, argsArray) => {
-    element.classList.add('hidden')
+    const elementRef = element 
+    elementRef.classList.add('hidden')
     setTimeout(() => {
         func.apply(null, argsArray)
-        element.classList.remove('hidden')
+        elementRef.classList.remove('hidden')
     }, 200);
 }
 
@@ -35,9 +36,5 @@ const setContent = (day) => {
 const setTab = (day) => {
     // displays temp / precipitation / wind hourly
 }
-
-
-
-
 
 export {setDOM, setDay, setTemp, setDayIcon, setContent}

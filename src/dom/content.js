@@ -6,8 +6,21 @@ const initContainers = (parentDiv) => {
 
     const topDiv = document.createElement('div')
     topDiv.id = "content-top"
-    const todaysIcon = document.createElement('img') 
-    todaysIcon.id = 'todays-icon'
+
+    const mainIconContainer = document.createElement('div')
+    mainIconContainer.id = "main-icon-container"
+    const mainIcon = document.createElement('img') 
+    mainIcon.id = 'main-icon'
+
+    const locationInfoDiv = document.createElement('div')
+    const locationName = document.createElement('div')
+    locationName.id = 'location-name'
+    const locationCountry = document.createElement('div')
+    locationCountry.id = 'location-country'
+    locationInfoDiv.id = 'location-info'
+
+    const mainTemperature = document.createElement('div')
+    mainTemperature.id = 'main-temperature'
 
     const bottomDiv = document.createElement('div')
     bottomDiv.id = "content-bottom"
@@ -35,7 +48,11 @@ const initContainers = (parentDiv) => {
         horzScrollDiv.appendChild(hourCard)
     }
 
-    topDiv.appendChild(todaysIcon)
+    locationInfoDiv.appendChild(locationName)
+    locationInfoDiv.appendChild(locationCountry)
+    topDiv.appendChild(mainIcon)
+    topDiv.appendChild(locationInfoDiv)
+    topDiv.appendChild(mainTemperature)
     tabDiv.appendChild(temperatureButton)
     tabDiv.appendChild(windButton)
     tabDiv.appendChild(precipitationButton)
