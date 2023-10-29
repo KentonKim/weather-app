@@ -36,6 +36,13 @@ form.addEventListener('submit', async (event) => {
   }
 })
 
+// initialize
+const arr = await searchLocation("Los Angeles", rightmain, radioF)
+arr.map( (element) => dayArray.push(element))
+// Initialize first day as selected date
+selectedDay = setDay(dayArray[0])
+
+
 
 radioC.onclick = () => {
  dayArray.map((dayObj) => setDOM(dayObj.tempDiv, setTemp, [dayObj, radioF]))
