@@ -22,14 +22,17 @@ const dayArray = []
 // New location
 form.addEventListener('submit', async (event) => {
   event.preventDefault()
+  const formValue = forminput.value
   dayArray.length = 0
   try {
-    const arr = await searchLocation(forminput, rightmain, radioF)
+    const arr = await searchLocation(formValue, rightmain, radioF)
     arr.map( (element) => dayArray.push(element))
     // Initialize first day as selected date
     selectedDay = setDay(dayArray[0])
   } catch (error) {
     console.log(error)
+  } finally {
+    forminput.value = ''
   }
 })
 
