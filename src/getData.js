@@ -1,5 +1,5 @@
 import weatherapi from "./weatherapi"
-import { unsplashApi, unsplashSecretApi } from "./unsplashapi"
+// import { unsplashApi, unsplashSecretApi } from "./unsplashapi"
 
 const getWeatherData = async (location) => {
     const string = `https://api.weatherapi.com/v1/forecast.json?key=${weatherapi()}&q=${location}&days=7`
@@ -16,9 +16,10 @@ const getWeatherData = async (location) => {
     }
 }
 
-const getUnsplashData = async (weather) => {
-    const string = `${unsplashApi()}`
+// const getUnsplashData = async (weather) => {
+//     const string = `${unsplashApi()}`
 
-}
+// }
 
-export {getWeatherData, getUnsplashData }
+// export {getWeatherData, getUnsplashData }
+export {getWeatherData}
