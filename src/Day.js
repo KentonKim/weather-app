@@ -1,4 +1,4 @@
-export default class Day {
+export default class Day { // MOVE DISPLAY TEMP AND DISPLAY WEEKDAY LONG TO OUTSIDE OF CLASS
     constructor(object, location, element) {
         this.location = location
         this.data = object
@@ -8,24 +8,12 @@ export default class Day {
         this.selected = false
     }
 
-    displayTempF() {
-        const maxf = Math.round(this.data.day.maxtemp_f)
-        const minf = Math.round(this.data.day.mintemp_f)
-        this.tempDiv.textContent = `High: ${maxf} \r\n Low: ${minf}`
-
-        if (this.selected) {
-            document.getElementById('main-temperature').textContent = `${maxf}˚`
-        }
+    getTempF() {
+        return  [Math.round(this.data.day.maxtemp_f), Math.round(this.data.day.mintemp_f)]
     }
 
-    displayTempC() {
-        const maxc = Math.round(this.data.day.maxtemp_c)
-        const minc = Math.round(this.data.day.mintemp_c)
-        this.tempDiv.textContent = `High: ${maxc} \r\n Low: ${minc}`
-
-        if (this.selected) {
-            document.getElementById('main-temperature').textContent = `${maxc}˚` 
-        }
+    getTempC() {
+        return  [Math.round(this.data.day.maxtemp_c), Math.round(this.data.day.mintemp_c)]
     }
 
     displayDayLong() {

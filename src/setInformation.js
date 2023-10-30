@@ -16,10 +16,17 @@ const setDay = (day) => {
 }
 
 const setTemp = (day, radioF) => {
+    let maxTemp
+    let minTemp
     if (radioF.checked) {
-        day.displayTempF()
+        [maxTemp,minTemp] = day.getTempF()
     } else {
-        day.displayTempC()
+        [maxTemp,minTemp] = day.getTempC()
+    }
+
+    day.tempDiv.textContent = `High: ${maxTemp} \r\n Low: ${minTemp}`
+    if (day.selected) {
+        document.getElementById('main-temperature').textContent = `${maxTemp}˚`
     }
 } 
 

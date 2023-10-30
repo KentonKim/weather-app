@@ -7,6 +7,9 @@ const initContainers = (parentDiv) => {
     const topDiv = document.createElement('div')
     topDiv.id = "content-top"
 
+    const topHeader = document.createElement('div')
+    topHeader.id = 'content-header'
+
     const mainIconContainer = document.createElement('div')
     mainIconContainer.id = "main-icon-container"
     const mainIcon = document.createElement('img') 
@@ -36,7 +39,10 @@ const initContainers = (parentDiv) => {
     const precipitationButton = document.createElement('button')
     precipitationButton.textContent = "Precipitation"
     precipitationButton.classList.add('tab-button')
-    
+    const uvButton = document.createElement('button')
+    uvButton.textContent = "UV"
+    uvButton.classList.add('tab-button')   
+
     const horzScrollDiv = document.createElement('div')
     horzScrollDiv.id = "horz-scroll"
 
@@ -50,12 +56,15 @@ const initContainers = (parentDiv) => {
 
     locationInfoDiv.appendChild(locationName)
     locationInfoDiv.appendChild(locationCountry)
-    topDiv.appendChild(mainIcon)
-    topDiv.appendChild(locationInfoDiv)
-    topDiv.appendChild(mainTemperature)
+    mainIconContainer.appendChild(mainIcon)
+    topHeader.appendChild(mainIconContainer)
+    topHeader.appendChild(locationInfoDiv)
+    topHeader.appendChild(mainTemperature)
+    topDiv.appendChild(topHeader)
     tabDiv.appendChild(temperatureButton)
     tabDiv.appendChild(windButton)
     tabDiv.appendChild(precipitationButton)
+    tabDiv.appendChild(uvButton)
     bottomDiv.appendChild(tabDiv)
     bottomDiv.appendChild(horzScrollDiv)
     contentContainer.appendChild(topDiv)

@@ -159,10 +159,14 @@ button:focus, input:focus {
     flex: 1;
     display: flex;
     flex-flow: row wrap;
-    align-items: start;
+    align-content: start;
 }
 
-#main-icon {
+#content-header {
+    flex: 1;
+    display: flex;
+    flex-flow: row;
+    align-content: flex-start;
 }
 
 #location-info {
@@ -186,6 +190,11 @@ button:focus, input:focus {
     margin-right: 15px;
     margin-top: -10px;
     transition: all var(--transition-slow) ease;
+}
+
+#main-icon-container {
+    margin-right: 3px;
+    margin-left: 3px;
 }
 
 #content-bottom {
@@ -251,11 +260,11 @@ button:focus, input:focus {
     height: 120px;
     position: relative;
     background-color: transparent; 
+    display: flex;
     justify-content: space-between;
     border-radius: 20px;
     padding: 10px;
     overflow: clip;
-    display: flex;
     flex: 1;
     overflow: hidden;
     background-color: var(--transparent-light);
@@ -323,14 +332,25 @@ button:focus, input:focus {
     /* /* Your CSS styles for screens with a width less than 600px go here */
     body {
         grid-template-columns: 1fr;
-        grid-template-rows: 2fr 1fr;
-    }
-    
-    #main-right {
-        display: grid;
+        grid-template-rows: 1fr 140px;
     }
 
     #main-right, #main-left {
         width: 100%;
     }
+
+    .card-container {
+        flex-flow: row;
+    }
+
+    .card {
+        flex-flow: column;
+        /* justify-content: between; */
+        padding: 0px;
+    }
+
+    .temperature {
+        white-space: normal;
+    }
+
   }
