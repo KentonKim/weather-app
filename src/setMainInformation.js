@@ -14,6 +14,9 @@ const setDay = (dayObj) => {
     document.getElementById('location-name').textContent = locationString
     document.getElementById('location-country').textContent = `${locationData.country}`
 
+
+    // Sunset Sunrise
+
     return dayObj
 }
 
