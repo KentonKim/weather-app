@@ -1,5 +1,3 @@
-import { sources } from "webpack"
-
 const initContainers = (parentDiv) => {
     // make container with image and text child elements
     const makeContainer = (string) => {
@@ -44,6 +42,7 @@ const initContainers = (parentDiv) => {
 
     // Content stuff
     const sunContainer = document.createElement('div')
+    sunContainer.id = 'sun-container'
     sunContainer.appendChild(makeContainer('sunrise'))
     sunContainer.appendChild(makeContainer('sunset'))
 
@@ -85,9 +84,6 @@ const initContainers = (parentDiv) => {
     topHeader.appendChild(mainIconContainer)
     topHeader.appendChild(locationInfoDiv)
     topHeader.appendChild(mainTemperature)
-
-    sunContainer.appendChild(sunriseContainer)
-    sunContainer.appendChild(sunsetContainer)
 
     topDiv.appendChild(topHeader)
 
