@@ -1,9 +1,8 @@
 import * as nav from './dom/nav'
-import {setDOM, setTemp, setDayOfWeek} from './setInformation'
+import {setDay, setDOM, setTemp, setDayOfWeek} from './setInformation'
 import './style.css'
 import mainDom from './dom/main'
 import searchLocation from './searchLocation'
-import setDay from './setMainInformation'
 import { initContainers } from './dom/content'
 
 // Setup main page
@@ -32,13 +31,20 @@ form.addEventListener('submit', async (event) => {
     arr.map( element => dayArray.push(element))
     // Initialize first day as selected date
     selectedDay = setDay(dayArray[0])
+
+    // Make days selectable
+    dayArray.forEach( dayObj => {
+      dayObj.element.addEventListener('mouseup', () => {
+        // selectedDay = setDOM(, setDay, dayObj)
+        // TODO SPLIT UP SETDAY
+      })
+    })
   } catch (error) {
     console.log(error)
   } finally {
     forminput.value = ''
   }
 })
-
 
 radioC.onclick = () => {
  dayArray.map((dayObj) => setDOM(dayObj.tempDiv, setTemp, [dayObj, radioF]))

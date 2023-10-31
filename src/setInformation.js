@@ -2,9 +2,10 @@ const setDOM = (element, func, argsArray) => {
     const elementRef = element 
     elementRef.classList.add('hidden')
     setTimeout(() => {
-        func.apply(null, argsArray)
+        functionReturn = func.apply(null, argsArray)
         elementRef.classList.remove('hidden')
     }, 200);
+    return functionReturn
 }
 
 const setDayOfWeek = (day, isShortened = false) => {
@@ -35,6 +36,30 @@ const setTemp = (day, radioF, isShortened = false) => {
     }
 } 
 
+const setDay = (dayObj) => {
+    dayObj.element.classList.add('selected')
+    dayObj.selected = true
+
+    // Weather Icon
+    const mainIcon = document.getElementById('main-icon')
+    mainIcon.src = dayObj.data.day.condition.icon
+    // Location
+    const locationData = dayObj.location
+    let locationString = `${locationData.name}`
+    if (locationData.region !== '') {
+        locationString += `, ${locationData.region}`
+    }
+    document.getElementById('location-name').textContent = locationString
+    document.getElementById('location-country').textContent = `${locationData.country}`
+
+
+    // Sunset Sunrise
+
+    return dayObj
+}
+
+
+
 const setDayOfWeekIcon = (day) => {
     day.element.style.backgroundImage = `url(http:${day.data.day.condition.icon})`
     day.element.style.backgroundPosition = "center"
@@ -49,4 +74,4 @@ const setTab = (day) => {
     // displays temp / precipitation / wind hourly
 }
 
-export {setDOM, setDayOfWeek, setTemp, setDayOfWeekIcon, setContent}
+export {setDOM, setDay, setDayOfWeek, setTemp, setDayOfWeekIcon, setContent}
