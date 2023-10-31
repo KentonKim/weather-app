@@ -1,6 +1,5 @@
 import isToggledF from "./isToggledF";
 
-
 const displayDayOfWeek = (dayObj, element, isShort = false) => {
     if (isShort) {
         element.textContent = dayObj.weekdayShort
@@ -34,11 +33,11 @@ const displayCardIcon = (dayObj, element) => {
     element.style.backgroundRepeat = "no-repeat"
 }
 
-const displayCardInfo = (card, dataArray) => {
+const displayCardInfo = (card, dataArray, isShort) => {
     const number = card.getAttribute('data-index')
     const dayData = dataArray[number]
-    displayTemp(dayData, card.lastChild)
-    displayDayOfWeek(dayData, card.firstChild)
+    displayTemp(dayData, card.lastChild, isShort)
+    displayDayOfWeek(dayData, card.firstChild, isShort)
     displayCardIcon(dayData, card)
 }
 
