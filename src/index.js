@@ -4,7 +4,7 @@ import { getWeatherData } from './data/getData'
 import showNotification from './dom/showNotification'
 import formatWeatherData from './data/formatWeatherData'
 import {displayCardInfo, displayDayOfWeek, displayTemp} from './displayCardInfo'
-import displayMainInfo from './displayMainInfo'
+import {displayMainInfo, displayMainTemperature, displayWindSpeed } from './displayMainInfo'
 import displayLocation from './displayLocation'
 
 // Setup main page
@@ -27,7 +27,8 @@ for (let i = 0; i < 7; i += 1) {
 }
 
 // Setup data
-let formattedWeatherData
+let formattedWeatherData = []
+let selectDay
 
 // Check for window width
 const mediaQueryList = window.matchMedia('(max-width: 900px)');
@@ -49,18 +50,14 @@ const searchLocation = async (query) => {
     // fill out the cards with info
     const cardArray = document.querySelectorAll('.card')
     for (let card of cardArray) {
-      displayCardInfo(card, formattedWeatherData)
+      displayCardInfo(card, formattedWeatherData, mediaQueryList.matches)
     }
 
     // fill out location
     displayLocation(weatherData.location)
     // display the first day
     displayMainInfo(formattedWeatherData[0])
-
-    /*
-    call selectDay function for the first day
-    make days selectable for selectDay
-    */
+    selectDay = formattedWeatherData[0]
 
     console.log(weatherData)
     console.log(formattedWeatherData)
@@ -92,24 +89,32 @@ form.addEventListener('submit', (e) => {
 //   })
 // }
 
-const toggleTemperature = (dataArray, isShort) => {
+const toggleUnits = (dataArray, isShort) => {
   try {
     for (let i = 0; i < dataArray.length; i += 1) {
         let cardTemperature = document.getElementById(`card-temperature-${i}`)
         displayTemp(dataArray[i], cardTemperature, isShort)
     }
+
+    // For main
+    const windText = document.getElementById('wind-text')
+    const windMphData = `${Math.round(selectDay.day.maxwind_mph)} mph`
+    const windKphData = `${Math.round(selectDay.day.maxwind_kph)} kph`
+    displayWindSpeed(windMphData, windKphData, windText)
+    const mainTemperature = document.getElementById('main-temperature')
+    displayMainTemperature(selectDay, mainTemperature)
   } catch (error) {
     console.log(error)
   }
 }
 
 radioC.onclick = () => {
-  toggleTemperature(formattedWeatherData, mediaQueryList.matches)
+  toggleUnits(formattedWeatherData, mediaQueryList.matches)
 //  setDOM(mainTemp, setTemp, [selectedDay, radioF])
 }
 
 radioF.onclick = () => {
-  toggleTemperature(formattedWeatherData, mediaQueryList.matches)
+  toggleUnits(formattedWeatherData, mediaQueryList.matches)
 //  setDOM(mainTemp, setTemp, [selectedDay, radioF])
 }
 
