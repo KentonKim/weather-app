@@ -1,10 +1,19 @@
+import sunriseIcon from "../icons/sunrise.svg"
+import sunsetIcon from "../icons/sunset.svg"
+import rainIcon from "../icons/rain.svg"
+import windIcon from "../icons/wind.svg"
+import snowIcon from "../icons/snow.svg"
+
+
 const initContainers = (parentDiv) => {
     // make container with image and text child elements
-    const makeContainer = (string) => {
+    const makeContainer = (string, img) => {
         const container = document.createElement('div')
         container.id = `${string}-container`
         const icon = document.createElement('img')
+        icon.classList.add('content-icon')
         icon.id = `${string}-icon`
+        icon.src = img
         const text = document.createElement('div')
         text.id = `${string}-text`
         container.appendChild(icon)
@@ -12,8 +21,8 @@ const initContainers = (parentDiv) => {
         return container
     }
 
-    const containerContainer = document.createElement('div')
-    containerContainer.id = 'content-container'
+    // const containerContainer = document.createElement('div')
+    // containerContainer.id = 'content-container'
     const contentContainer = document.createElement('div')
     contentContainer.id = "content"
 
@@ -43,8 +52,8 @@ const initContainers = (parentDiv) => {
     // Content stuff
     const sunContainer = document.createElement('div')
     sunContainer.id = 'sun-container'
-    sunContainer.appendChild(makeContainer('sunrise'))
-    sunContainer.appendChild(makeContainer('sunset'))
+    sunContainer.appendChild(makeContainer('sunrise', sunriseIcon))
+    sunContainer.appendChild(makeContainer('sunset', sunsetIcon))
 
     // Bottomm Items
     const bottomDiv = document.createElement('div')
@@ -88,9 +97,9 @@ const initContainers = (parentDiv) => {
     topDiv.appendChild(topHeader)
 
     topDiv.appendChild(sunContainer)
-    topDiv.appendChild(makeContainer('wind'))
-    topDiv.appendChild(makeContainer('rain'))
-    topDiv.appendChild(makeContainer('snow'))
+    topDiv.appendChild(makeContainer('wind', windIcon))
+    topDiv.appendChild(makeContainer('rain', rainIcon))
+    topDiv.appendChild(makeContainer('snow', snowIcon))
 
     tabDiv.appendChild(temperatureButton)
     tabDiv.appendChild(windButton)
@@ -103,9 +112,10 @@ const initContainers = (parentDiv) => {
     contentContainer.appendChild(topDiv)
     contentContainer.appendChild(bottomDiv)
 
-    containerContainer.appendChild(contentContainer)
+    // containerContainer.appendChild(contentContainer)
 
-    parentDiv.appendChild(containerContainer)
+    // parentDiv.appendChild(containerContainer)
+    parentDiv.appendChild(contentContainer)
     return 
 }
 
