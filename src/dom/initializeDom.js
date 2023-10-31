@@ -125,7 +125,6 @@ const createMainContentDom = () => {
     for (let i = 0; i < 24; i += 1) {
         let hourCard = _makeElement('div', `hour-card-${i}`)
         hourCard.classList.add('hour-card')
-        hourCard.textContent = i 
         horzScrollDiv.appendChild(hourCard)
     }
 

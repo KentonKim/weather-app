@@ -27,14 +27,21 @@ const displayWindSpeed = (mph, kph, element) => {
     }
 }
 
+const displayHours = (dayObj, number) => {
+
+}
+
 const displayMainInfo = (dayObj) => {
     displayWallpaper(document.body, dayObj.day.condition.code)
 
+    // Icon
     const mainIcon = document.getElementById('main-icon')
     displayMainIcon(dayObj, mainIcon)
+    // Temperature
     const mainTemperature = document.getElementById('main-temperature')
     displayMainTemperature(dayObj, mainTemperature)
 
+    // Main Content Data
     const sunriseText = document.getElementById('sunrise-text')
     const sunriseData = dayObj.astro.sunrise
     displayData(sunriseData, sunriseText)
@@ -52,7 +59,7 @@ const displayMainInfo = (dayObj) => {
     const rainData = `${dayObj.day.daily_chance_of_rain}%`
     displayData(rainData, rainText)
 
-    // display info on main content
+    
 }
 
 
