@@ -119,13 +119,13 @@ const createMainContentDom = () => {
     uvButton.textContent = "UV"
     uvButton.classList.add('tab-button')   
 
-    const horzScrollDiv = _makeElement('div','horz-scroll')
+    const hourCardContainer = _makeElement('div','hour-card-container')
 
     // add cards
     for (let i = 0; i < 24; i += 1) {
         let hourCard = _makeElement('div', `hour-card-${i}`)
         hourCard.classList.add('hour-card')
-        horzScrollDiv.appendChild(hourCard)
+        hourCardContainer.appendChild(hourCard)
     }
 
     locationInfoDiv.appendChild(locationName)
@@ -152,7 +152,7 @@ const createMainContentDom = () => {
     tabDiv.appendChild(uvButton)
 
     bottomContent.appendChild(tabDiv)
-    bottomContent.appendChild(horzScrollDiv)
+    bottomContent.appendChild(hourCardContainer)
 
     content.appendChild(topContent)
     content.appendChild(bottomContent)
