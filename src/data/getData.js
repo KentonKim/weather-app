@@ -1,4 +1,4 @@
-import weatherapi from "./weatherapi"
+import weatherapi from "../weatherapi"
 // import { unsplashApi, unsplashSecretApi } from "./unsplashapi"
 
 const getWeatherData = async (location) => {

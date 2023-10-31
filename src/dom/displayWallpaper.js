@@ -20,10 +20,8 @@ const snowyPics = [Snowy1, Snowy2, Snowy3, Snowy4]
 const cloudyPics = [Cloudy1, Cloudy2, Cloudy3, Cloudy4]
 const rainyPics = [Rainy1, Rainy2, Rainy3, Rainy4]
 
-const displayWallpaper = (day,parentDiv) => {
-    const weatherCode = day.data.day.condition.code
-    const weatherPics = _determineWallpaper(weatherCode) 
-
+const displayWallpaper = (parentDiv, code) => {
+    const weatherPics = _determineWallpaper(code) 
     try {
         const number = getRandNum()
         parentDiv.style.backgroundImage = `url(${weatherPics[number]})`

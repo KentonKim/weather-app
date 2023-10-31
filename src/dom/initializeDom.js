@@ -76,6 +76,7 @@ const createNavbarDom = () => {
 const createCardDom = (number) => {
     const element = _makeElement('div', `card-${number}`)
     element.classList.add('card')
+    element.setAttribute('data-index', number); 
     const weekday = _makeElement('div', `card-weekday-${number}`)
     weekday.className = 'card-weekday'
     const temperature = _makeElement('div', `card-temperature-${number}`)

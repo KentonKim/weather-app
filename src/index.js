@@ -1,9 +1,10 @@
 import * as createDom from './dom/initializeDom'
 import {setDay, setDOM, setTemp, setDayOfWeek} from './setInformation'
-import './style.css'
-import { getWeatherData } from './getData'
-import showNotification from './showNotification'
-import formatWeatherData from './formatWeatherData'
+import './css/style.css'
+import { getWeatherData } from './data/getData'
+import showNotification from './dom/showNotification'
+import formatWeatherData from './data/formatWeatherData'
+import displayWallpaper from './dom/displayWallpaper'
 
 // Setup main page
 const [leftmain, rightmain] = createDom.createMainDom()
@@ -24,6 +25,9 @@ for (let i = 0; i < 7; i += 1) {
   rightmain.appendChild(cardDiv)
 }
 
+// Setup data
+let formattedWeatherData
+
 // Check for window width
 const mediaQueryList = window.matchMedia('(max-width: 900px)');
 
@@ -31,48 +35,20 @@ const mediaQueryList = window.matchMedia('(max-width: 900px)');
 const form = document.getElementById('search-form')
 const forminput = document.getElementById('search-input')
 const mainTemp = document.getElementById('main-temperature')
-let selectedDay;
-let dayArray
 
-// New location
-/*
-form.addEventListener('submit', async (event) => {
-  event.preventDefault()
-  const formValue = forminput.value
-  dayArray.length = 0
+const searchLocation = async (query) => {
   try {
-    const arr = await searchLocation(formValue, rightmain, radioF)
-    arr.map( element => dayArray.push(element))
-    // Initialize first day as selected date
-    selectedDay = setDay(dayArray[0])
+    const weatherData = await getWeatherData(query)
+    formattedWeatherData = formatWeatherData(weatherData)
+    /*
+    call selectDay function for the first day
+    make days selectable for selectDay
+    FOR EACH DAY
+      - set day of week, icon, temperature
+        - consider toggled F
+        - consider media width
+     */
 
-    // Make days selectable
-    dayArray.forEach( dayObj => {
-      dayObj.element.addEventListener('mouseup', () => {
-        // selectedDay = setDOM(, setDay, dayObj)
-        // TODO SPLIT UP SETDAY
-      })
-    })
-  } catch (error) {
-    console.log(error)
-  } finally {
-    forminput.value = ''
-  }
-})
-*/
-
-form.addEventListener('submit', async (event) => {
-  event.preventDefault()
-  // Reset day data 
-  const formValue = forminput.value
-  forminput.value = ''
-  try {
-    // just get the damn data
-    const weatherData = await getWeatherData(formValue)
-    const formattedWeatherData = formatWeatherData(weatherData)
-
-    // function that takes formatted data and
-      // outputs day class array
     console.log(weatherData)
     console.log(formattedWeatherData)
   } catch (error) {
@@ -80,21 +56,28 @@ form.addEventListener('submit', async (event) => {
       showNotification('Location not found')
     }
     console.log(error)
-    return
   }
+}
+
+// New location
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  // Reset day data 
+  const formValue = forminput.value
+  forminput.value = ''
+  searchLocation(formValue)
 })
 
-/*
-Form should search for data
-- if it finds data, call function with resolve 
-- if it doesnt, notify 
-*/ 
-
-
-
-
-
-
+// Add event listener for each card
+// const cardArray = document.querySelectorAll('.card')
+// for (let card of cardArray) {
+//   let number = parseInt(card.getAttribute('data-index'), 10)
+//   console.log(formattedWeatherData)
+//   let dayData = formattedWeatherData[number] 
+//   card.addEventListener('mouseup', () => {
+//     displayWallpaper(document.body, dayData.day.condition.code)
+//   })
+// }
 
 
 // radioC.onclick = () => {
