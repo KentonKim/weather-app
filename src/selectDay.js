@@ -1,4 +1,6 @@
-    // function select day
+import displayWallpaper from './dom/displayWallpaper'
+
+// function select day
     //   - display wallpaper
     //   - display info on main content
 

@@ -1,3 +1,5 @@
+import isToggledF from "./isToggledF";
+
 const setDOM = (element, func, argsArray) => {
     const elementRef = element 
     elementRef.classList.add('hidden')
@@ -8,33 +10,42 @@ const setDOM = (element, func, argsArray) => {
     return functionReturn
 }
 
-const setDayOfWeek = (day, isShortened = false) => {
-    if (isShortened) {
-        day.displayDayShort()
+const displayDayOfWeek = (dayObj, element, isLong = true) => {
+    if (isLong) {
+        element.textContent = dayObj.weekdayLong
     } else {
-        day.displayDayLong()
+        element.textContent = dayObj.weekdayShort
     }
 }
 
-const setTemp = (day, radioF, isShortened = false) => {
+const displayTemp = (dayObj, element, isLong = true) => {
     let maxTemp
     let minTemp
-    if (radioF.checked) {
-        [maxTemp,minTemp] = day.getTempF()
+
+    if (isToggledF()) {
+        maxTemp = dayObj.maxF
+        minTemp = dayObj.minF
     } else {
-        [maxTemp,minTemp] = day.getTempC()
+        maxTemp = dayObj.maxC
+        minTemp = dayObj.minC
     }
 
-    if (isShortened) {
-        day.tempDiv.textContent = `${maxTemp} / ${minTemp}`
+    if (isLong) {
+        element.textContent = `High: ${maxTemp} \r\n Low: ${minTemp}`
     } else {
-        day.tempDiv.textContent = `High: ${maxTemp} \r\n Low: ${minTemp}`
-    }
-
-    if (day.selected) {
-        document.getElementById('main-temperature').textContent = `${maxTemp}˚`
+        element.textContent = `${maxTemp} / ${minTemp}`
     }
 } 
+
+const displayCardInfo = (card, dataArray) => {
+    const number = card.getAttribute('data-index')
+    const dayData = dataArray[number]
+    displayTemp(dayData, card.lastChild)
+    displayDayOfWeek(dayData, card.firstChild)
+}
+
+// who knows what works down there
+
 
 const setDay = (dayObj) => {
     dayObj.element.classList.add('selected')
@@ -74,4 +85,4 @@ const setTab = (day) => {
     // displays temp / precipitation / wind hourly
 }
 
-export {setDOM, setDay, setDayOfWeek, setTemp, setDayOfWeekIcon, setContent}
+export default displayCardInfo

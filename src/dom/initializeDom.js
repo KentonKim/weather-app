@@ -42,7 +42,7 @@ const createNavbarDom = () => {
 
     // Toggle temperature C/F
     const toggleTempLabelF = document.createElement('label')
-    const toggleTempRadioF = document.createElement('input')
+    const toggleTempRadioF = _makeElement('input', 'radio-f')
     toggleTempRadioF.type = 'radio'
     toggleTempRadioF.name = 'toggleTemp'
     toggleTempLabelF.textContent = 'F˚'
@@ -50,7 +50,7 @@ const createNavbarDom = () => {
     toggleTempLabelF.appendChild(toggleTempRadioF)
 
     const toggleTempLabelC = document.createElement('label')
-    const toggleTempRadioC = document.createElement('input')
+    const toggleTempRadioC = _makeElement('input', 'radio-c')
     toggleTempRadioC.type = 'radio'
     toggleTempRadioC.name = 'toggleTemp'
     toggleTempLabelC.textContent = 'C˚'

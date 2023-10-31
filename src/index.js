@@ -1,10 +1,10 @@
 import * as createDom from './dom/initializeDom'
-import {setDay, setDOM, setTemp, setDayOfWeek} from './setInformation'
+// import {setDay, setDOM, setTemp, setDayOfWeek} from './displayCardInfo'
 import './css/style.css'
 import { getWeatherData } from './data/getData'
 import showNotification from './dom/showNotification'
 import formatWeatherData from './data/formatWeatherData'
-import displayWallpaper from './dom/displayWallpaper'
+import displayCardInfo from './displayCardInfo'
 
 // Setup main page
 const [leftmain, rightmain] = createDom.createMainDom()
@@ -40,6 +40,13 @@ const searchLocation = async (query) => {
   try {
     const weatherData = await getWeatherData(query)
     formattedWeatherData = formatWeatherData(weatherData)
+
+    // fill out the cards with info
+    const cardArray = document.querySelectorAll('.card')
+    for (let card of cardArray) {
+      displayCardInfo(card, formattedWeatherData)
+    }
+
     /*
     call selectDay function for the first day
     make days selectable for selectDay
