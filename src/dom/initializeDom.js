@@ -33,8 +33,8 @@ const createNavbarDom = () => {
     const navbar = _makeElement('div', 'navbar')
 
     // Search element
-    const form = _makeElement('div', 'search-form')
-    const input = _makeElement('div', 'search-input')
+    const form = _makeElement('form', 'search-form')
+    const input = _makeElement('input', 'search-input')
     input.autocomplete = 'off'
     const button = _makeElement('button', 'search-button')
     const image = _makeElement('img', 'search-icon')

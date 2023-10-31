@@ -1,6 +1,6 @@
 import {createCard, clearCards } from './dom/card'
 import Day from './Day'
-import makeDays from './makeDays'
+import makeDays from './formatWeatherData'
 import {setDOM, setDayOfWeek, setDayOfWeekIcon, setTemp} from './setInformation'
 import showNotification from './showNotification'
 import displayWallpaper from './dom/displayWallpaper'

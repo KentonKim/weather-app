@@ -1,11 +1,9 @@
-import { getWeatherData } from "./getData"
 import { DateTime } from 'luxon'
 
-const getDays = async (location) => {
+const formatWeatherData = (weatherData) => {
     try {
-        const resolve = await getWeatherData(location)
-        const zone = resolve.location.tz_id
-        const daysForecast = resolve.forecast.forecastday
+        const zone = weatherData.location.tz_id
+        const daysForecast = weatherData.forecast.forecastday
         const regex = /^(\d{4})-(\d{2})-(\d{2})$/;
         daysForecast.forEach( (element) => {
             const dateStr = element.date 
@@ -30,10 +28,10 @@ const getDays = async (location) => {
                 element.weekdayShort = dateTime.weekdayShort
             }
         })
-    return [resolve, daysForecast]
+    return daysForecast
     } catch(error) {
         throw error
     }
 }
 
-export default getDays
+export default formatWeatherData 
