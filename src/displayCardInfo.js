@@ -1,15 +1,15 @@
 import isToggledF from "./isToggledF";
 
 
-const displayDayOfWeek = (dayObj, element, isLong = true) => {
-    if (isLong) {
-        element.textContent = dayObj.weekdayLong
-    } else {
+const displayDayOfWeek = (dayObj, element, isShort = false) => {
+    if (isShort) {
         element.textContent = dayObj.weekdayShort
+    } else {
+        element.textContent = dayObj.weekdayLong
     }
 }
 
-const displayTemp = (dayObj, element, isLong = true) => {
+const displayTemp = (dayObj, element, isShort = false) => {
     let maxTemp
     let minTemp
 
@@ -21,10 +21,10 @@ const displayTemp = (dayObj, element, isLong = true) => {
         minTemp = dayObj.minC
     }
 
-    if (isLong) {
-        element.textContent = `High: ${maxTemp} \r\n Low: ${minTemp}`
-    } else {
+    if (isShort) {
         element.textContent = `${maxTemp} / ${minTemp}`
+    } else {
+        element.textContent = `High: ${maxTemp} \r\n Low: ${minTemp}`
     }
 } 
 
@@ -42,4 +42,4 @@ const displayCardInfo = (card, dataArray) => {
     displayCardIcon(dayData, card)
 }
 
-export default displayCardInfo
+export {displayDayOfWeek, displayTemp, displayCardInfo} 
