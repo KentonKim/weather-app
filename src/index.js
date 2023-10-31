@@ -93,10 +93,14 @@ form.addEventListener('submit', (e) => {
 // }
 
 const toggleTemperature = (dataArray, isShort) => {
+  try {
     for (let i = 0; i < dataArray.length; i += 1) {
         let cardTemperature = document.getElementById(`card-temperature-${i}`)
         displayTemp(dataArray[i], cardTemperature, isShort)
     }
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 radioC.onclick = () => {
