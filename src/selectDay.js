@@ -18,11 +18,13 @@ when you have a specific data
 */
 
 const selectDay = (dayObj) => {
+    displayWallpaper(document.body, dayObj.day.condition.code)
     /* 
     display wallpaper
     display info on main content
     */
 }
+
 
 
 export default selectDay

@@ -1,29 +1,40 @@
+import displayWallpaper from './dom/displayWallpaper'
+import isToggledF from './isToggledF'
+
+const displayMainIcon = (dayObj, element) => {
+    element.src = dayObj.day.condition.icon
+}
+
+const displayMainTemperature = (dayObj, element) => {
+    let maxTemp
+    if (isToggledF()) {
+        maxTemp = dayObj.maxF
+    } else {
+        maxTemp = dayObj.maxC
+    }
+    element.textContent = `${maxTemp}°`
+}
+
+// function select day
+    //   - display info on main content
+
+const displayMainInfo = (dayObj) => {
+    displayWallpaper(document.body, dayObj.day.condition.code)
+
+    const mainIcon = document.getElementById('main-icon')
+    displayMainIcon(dayObj, mainIcon)
+    const mainTemperature = document.getElementById('main-temperature')
+    displayMainTemperature(dayObj, mainTemperature)
+
+    // display info on main content
+}
+
+
 const setDay = (dayObj) => {
     dayObj.element.classList.add('selected')
     dayObj.selected = true
-
-    // Weather Icon
-    const mainIcon = document.getElementById('main-icon')
-    mainIcon.src = dayObj.data.day.condition.icon
-    // Location
-    const locationData = dayObj.location
-    let locationString = `${locationData.name}`
-    if (locationData.region !== '') {
-        locationString += `, ${locationData.region}`
-    }
-    document.getElementById('location-name').textContent = locationString
-    document.getElementById('location-country').textContent = `${locationData.country}`
-
-
-    // Sunset Sunrise
-
-    return dayObj
 }
 
-const setContent = (day) => {
-    // set icon
-}
 
-const setTab = (day) => {
-    // displays temp / precipitation / wind hourly
-}
+
+export default displayMainInfo 
