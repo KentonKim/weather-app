@@ -13,6 +13,7 @@ const _makeElement = (type, id) => {
 
 const _makeContainer = (string, img) => {
     const container = _makeElement('div', `${string}-container`)
+    container.className = 'content-main' 
     const icon = _makeElement('img', `${string}-icon`)
     icon.classList.add('content-icon')
     icon.src = img
@@ -101,11 +102,7 @@ const createMainContentDom = () => {
     const locationCountry = _makeElement('div', 'location-country')
     const mainTemperature = _makeElement('div', 'main-temperature')
 
-    // Content stuff
-    const sunContainer = _makeElement('div', 'sun-container')
-    sunContainer.appendChild(_makeContainer('sunrise', sunriseIcon))
-    sunContainer.appendChild(_makeContainer('sunset', sunsetIcon))
-
+    const contentMain = _makeElement('div', 'content-main-container')
     const tabDiv = _makeElement('div', 'horz-scroll-tabs')
 
     // Buttons for hourly info
@@ -143,10 +140,12 @@ const createMainContentDom = () => {
 
     topContent.appendChild(topHeader)
 
-    topContent.appendChild(sunContainer)
-    topContent.appendChild(_makeContainer('wind', windIcon))
-    topContent.appendChild(_makeContainer('rain', rainIcon))
-    topContent.appendChild(_makeContainer('snow', snowIcon))
+    contentMain.appendChild(_makeContainer('sunrise', sunriseIcon))
+    contentMain.appendChild(_makeContainer('sunset', sunsetIcon))
+    contentMain.appendChild(_makeContainer('wind', windIcon))
+    contentMain.appendChild(_makeContainer('rain', rainIcon))
+    contentMain.appendChild(_makeContainer('snow', snowIcon))
+    topContent.appendChild(contentMain)
 
     tabDiv.appendChild(temperatureButton)
     tabDiv.appendChild(windButton)
