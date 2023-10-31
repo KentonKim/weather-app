@@ -3,7 +3,7 @@
 
 * {
     background-color: transparent;
-    border: 1px solid blueviolet;
+    /* border: 1px solid blueviolet; */
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -362,3 +362,9 @@ button:focus, input:focus {
     }
 
   }
+
+@media (max-width: 650px) {
+    .temperature {
+        font-size: medium;
+    }
+}

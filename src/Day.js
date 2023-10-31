@@ -9,11 +9,11 @@ export default class Day { // MOVE DISPLAY TEMP AND DISPLAY WEEKDAY LONG TO OUTS
     }
 
     getTempF() {
-        return  [Math.round(this.data.day.maxtemp_f), Math.round(this.data.day.mintemp_f)]
+        return [Math.round(this.data.day.maxtemp_f), Math.round(this.data.day.mintemp_f)]
     }
 
     getTempC() {
-        return  [Math.round(this.data.day.maxtemp_c), Math.round(this.data.day.mintemp_c)]
+        return [Math.round(this.data.day.maxtemp_c), Math.round(this.data.day.mintemp_c)]
     }
 
     displayDayLong() {
