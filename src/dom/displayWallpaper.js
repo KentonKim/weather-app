@@ -22,7 +22,7 @@ const rainyPics = [Rainy1, Rainy2, Rainy3, Rainy4]
 
 const displayWallpaper = (day,parentDiv) => {
     const weatherCode = day.data.day.condition.code
-    const weatherPics = determineWallpaper(weatherCode) 
+    const weatherPics = _determineWallpaper(weatherCode) 
 
     try {
         const number = getRandNum()
@@ -34,7 +34,7 @@ const displayWallpaper = (day,parentDiv) => {
     return
 }
 
-const determineWallpaper = (condition) => {
+const _determineWallpaper = (condition) => {
     // const sunnyarray = [1000, 1003]
     const rainyarray = [1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189,
                         1192, 1195, 1198, 1201, 1240, 1243, 1246, 1249,
