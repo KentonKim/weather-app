@@ -1,10 +1,11 @@
 import * as createDom from './dom/initializeDom'
-// import {setDay, setDOM, setTemp, setDayOfWeek} from './displayCardInfo'
 import './css/style.css'
 import { getWeatherData } from './data/getData'
 import showNotification from './dom/showNotification'
 import formatWeatherData from './data/formatWeatherData'
-import displayCardInfo from './displayCardInfo'
+import {displayCardInfo, displayDayOfWeek, displayTemp} from './displayCardInfo'
+import displayMainInfo from './displayMainInfo'
+import displayLocation from './displayLocation'
 
 // Setup main page
 const [leftmain, rightmain] = createDom.createMainDom()
@@ -36,6 +37,10 @@ const form = document.getElementById('search-form')
 const forminput = document.getElementById('search-input')
 const mainTemp = document.getElementById('main-temperature')
 
+// Toggle Temperature
+const radioC = document.getElementById('radio-c')
+const radioF = document.getElementById('radio-f')
+
 const searchLocation = async (query) => {
   try {
     const weatherData = await getWeatherData(query)
@@ -47,14 +52,15 @@ const searchLocation = async (query) => {
       displayCardInfo(card, formattedWeatherData)
     }
 
+    // fill out location
+    displayLocation(weatherData.location)
+    // display the first day
+    displayMainInfo(formattedWeatherData[0])
+
     /*
     call selectDay function for the first day
     make days selectable for selectDay
-    FOR EACH DAY
-      - set day of week, icon, temperature
-        - consider toggled F
-        - consider media width
-     */
+    */
 
     console.log(weatherData)
     console.log(formattedWeatherData)
@@ -86,30 +92,30 @@ form.addEventListener('submit', (e) => {
 //   })
 // }
 
+const toggleTemperature = (dataArray, isShort) => {
+    for (let i = 0; i < dataArray.length; i += 1) {
+        let cardTemperature = document.getElementById(`card-temperature-${i}`)
+        displayTemp(dataArray[i], cardTemperature, isShort)
+    }
+}
 
-// radioC.onclick = () => {
-//  dayArray.map((dayObj) => setDOM(dayObj.tempDiv, setTemp, [dayObj, radioF]))
+radioC.onclick = () => {
+  toggleTemperature(formattedWeatherData, mediaQueryList.matches)
 //  setDOM(mainTemp, setTemp, [selectedDay, radioF])
-// }
+}
 
-// radioF.onclick = () => {
-//  dayArray.map((dayObj) => setDOM(dayObj.tempDiv, setTemp, [dayObj, radioF]))
+radioF.onclick = () => {
+  toggleTemperature(formattedWeatherData, mediaQueryList.matches)
 //  setDOM(mainTemp, setTemp, [selectedDay, radioF])
-// }
+}
 
-// // Add an event listener for changing from full weekday name to abbreviated 
-// mediaQueryList.addEventListener('change', (event) => {
-//   if (event.matches) {
-//     // The width matches the media query
-//     dayArray.map(dayObj => {
-//       setDayOfWeek(dayObj, true)
-//       setTemp(dayObj, radioF, true)
-//     } )
-//   } else {
-//     // The width does not match the media query
-//     dayArray.map(dayObj => {
-//       setDayOfWeek(dayObj)
-//       setTemp(dayObj, radioF)
-//     } )
-//   }
-// });
+
+
+// Add an event listener for changing from full weekday name to abbreviated 
+mediaQueryList.addEventListener('change', (event) => {
+  for (let i = 0; i < formattedWeatherData.length; i += 1) {
+    let dayObj = formattedWeatherData[i]
+    displayDayOfWeek(dayObj, document.getElementById(`card-weekday-${i}`), event.matches)
+    displayTemp(dayObj, document.getElementById(`card-temperature-${i}`), event.matches)
+  }
+});
