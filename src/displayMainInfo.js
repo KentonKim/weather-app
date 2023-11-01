@@ -1,29 +1,27 @@
 import displayWallpaper from './dom/displayWallpaper'
 import isToggledF from './isToggledF'
 
-const displayMainIcon = (dayObj, element) => {
-    element.src = dayObj.day.condition.icon
+const displayIcon = (data, element) => { // CORE FUNCTION 
+    element.src = data
+}
+
+const displayData = (data, element) => { // CORE FUNCTION 
+    element.textContent = data
 }
 
 const displayMainTemperature = (dayObj, element) => {
-    let maxTemp
     if (isToggledF()) {
-        maxTemp = dayObj.maxF
+        displayData(`${dayObj.maxF}°`, element)
     } else {
-        maxTemp = dayObj.maxC
+        displayData(`${dayObj.maxC}°`, element)
     }
-    element.textContent = `${maxTemp}°`
-}
-
-const displayData = (data, element) => {
-    element.textContent = data
 }
 
 const displayWindSpeed = (mph, kph, element) => {
     if (isToggledF()) {
-        element.textContent = mph
+        displayData(mph, element)
     } else {
-        element.textContent = kph
+        displayData(kph, element)
     }
 }
 
@@ -36,7 +34,9 @@ const displayMainInfo = (dayObj) => {
 
     // Icon
     const mainIcon = document.getElementById('main-icon')
-    displayMainIcon(dayObj, mainIcon)
+    displayIcon(dayObj.day.condition.icon, mainIcon)
+    const mainIconText = document.getElementById('main-icon-text')
+    displayData(dayObj.weekdayShort.toUpperCase(), mainIconText)
     // Temperature
     const mainTemperature = document.getElementById('main-temperature')
     displayMainTemperature(dayObj, mainTemperature)
@@ -58,14 +58,6 @@ const displayMainInfo = (dayObj) => {
     const rainText = document.getElementById('rain-text')
     const rainData = `${dayObj.day.daily_chance_of_rain}%`
     displayData(rainData, rainText)
-
-    
-}
-
-
-const setDay = (dayObj) => {
-    dayObj.element.classList.add('selected')
-    dayObj.selected = true
 }
 
 export {displayMainInfo, displayWindSpeed, displayMainTemperature}

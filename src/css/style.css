@@ -29,7 +29,7 @@
 body, html {
     width: 100%;
     height: 100%;
-    background-color: antiquewhite;
+    background-color: black;
     /* overflow: hidden; */
 }
 
@@ -205,8 +205,14 @@ button:focus, input:focus {
 }
 
 #main-icon-container {
-    margin-right: 3px;
+    margin-right: 15px;
     margin-left: 3px;
+}
+
+#main-icon-text {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: -15px;
 }
 
 .content-icon {

@@ -97,6 +97,7 @@ const createMainContentDom = () => {
     const topHeader = _makeElement('div', 'content-header')
     const mainIconContainer = _makeElement('div', 'main-icon-container')
     const mainIcon = _makeElement('img', 'main-icon')
+    const mainIconText = _makeElement('div', 'main-icon-text')
     const locationInfoDiv = _makeElement('div', 'location-info')
     const locationName = _makeElement('div', 'location-name')
     const locationCountry = _makeElement('div', 'location-country')
@@ -142,6 +143,7 @@ const createMainContentDom = () => {
     locationInfoDiv.appendChild(locationCountry)
 
     mainIconContainer.appendChild(mainIcon)
+    mainIconContainer.appendChild(mainIconText)
 
     topHeader.appendChild(mainIconContainer)
     topHeader.appendChild(locationInfoDiv)
