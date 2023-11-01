@@ -1,10 +1,11 @@
+import { displayData, displayIcon } from "./displayCore";
 import isToggledF from "./isToggledF";
 
 const displayDayOfWeek = (dayObj, element, isShort = false) => {
     if (isShort) {
-        element.textContent = dayObj.weekdayShort
+        displayData(dayObj.weekdayShort, element)
     } else {
-        element.textContent = dayObj.weekdayLong
+        displayData(dayObj.weekdayLong, element)
     }
 }
 
@@ -13,24 +14,22 @@ const displayTemp = (dayObj, element, isShort = false) => {
     let minTemp
 
     if (isToggledF()) {
-        maxTemp = dayObj.maxF
-        minTemp = dayObj.minF
+        maxTemp = Math.round(dayObj.day.maxtemp_f)
+        minTemp = Math.round(dayObj.day.mintemp_f)
     } else {
-        maxTemp = dayObj.maxC
-        minTemp = dayObj.minC
+        maxTemp = Math.round(dayObj.day.maxtemp_c)
+        minTemp = Math.round(dayObj.day.mintemp_c)
     }
 
     if (isShort) {
-        element.textContent = `${maxTemp} / ${minTemp}`
+        displayData(`${maxTemp} / ${minTemp}`, element)
     } else {
-        element.textContent = `High: ${maxTemp} \r\n Low: ${minTemp}`
+        displayData(`High: ${maxTemp} \r\n Low: ${minTemp}`, element)
     }
 } 
 
 const displayCardIcon = (dayObj, element) => {
     element.style.backgroundImage = `url(http:${dayObj.day.condition.icon})`
-    element.style.backgroundPosition = "center"
-    element.style.backgroundRepeat = "no-repeat"
 }
 
 const displayCardInfo = (card, dataArray, isShort) => {

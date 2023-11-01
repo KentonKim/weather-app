@@ -1,19 +1,21 @@
 import displayWallpaper from './dom/displayWallpaper'
 import isToggledF from './isToggledF'
+import { displayData, displayIcon } from './displayCore'
 
-const displayIcon = (data, element) => { // CORE FUNCTION 
-    element.src = data
-}
-
-const displayData = (data, element) => { // CORE FUNCTION 
-    element.textContent = data
-}
 
 const displayMainTemperature = (dayObj, element) => {
     if (isToggledF()) {
-        displayData(`${dayObj.maxF}°`, element)
+        displayData(`${Math.round(dayObj.day.maxtemp_f)}°`, element)
     } else {
-        displayData(`${dayObj.maxC}°`, element)
+        displayData(`${Math.round(dayObj.day.maxtemp_c)}°`, element)
+    }
+}
+
+const displayHourCardTemperature = (hourObj, element) => {
+    if (isToggledF()) {
+        displayData(`${Math.round(hourObj.temp_f)}°`, element)
+    } else {
+        displayData(`${Math.round(hourObj.temp_c)}°`, element)
     }
 }
 
@@ -23,10 +25,6 @@ const displayWindSpeed = (mph, kph, element) => {
     } else {
         displayData(kph, element)
     }
-}
-
-const displayHours = (dayObj, number) => {
-
 }
 
 const displayMainInfo = (dayObj) => {
@@ -58,6 +56,20 @@ const displayMainInfo = (dayObj) => {
     const rainText = document.getElementById('rain-text')
     const rainData = `${dayObj.day.daily_chance_of_rain}%`
     displayData(rainData, rainText)
+
+    displayHourTemp(dayObj)
 }
+
+const displayHourTemp = (dayObj) => {
+    const hourCardIconArray = document.querySelectorAll('.hour-card-icon')
+    const hourCardTextArray = document.querySelectorAll('.hour-card-text')
+
+    for (let i = 0; i < hourCardIconArray.length; i += 1) {
+        displayHourCardTemperature(dayObj.hour[i], hourCardTextArray[i])
+        displayIcon(dayObj.hour[i].condition.icon, hourCardIconArray[i])
+    }
+}
+
+
 
 export {displayMainInfo, displayWindSpeed, displayMainTemperature}
