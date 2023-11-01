@@ -162,8 +162,6 @@ const clickButton = (e) => {
   if (e.target === currentButton) {
     return
   }
-  currentButton.classList.remove('selected')
-  e.target.classList.add('selected')
   currentButton = e.target
 
   // Move Underline
