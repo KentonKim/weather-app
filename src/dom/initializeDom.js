@@ -119,6 +119,7 @@ const createMainContentDom = () => {
     const uvButton = _makeElement('button', 'button-uv')
     uvButton.textContent = "UV"
     uvButton.classList.add('tab-button')   
+    const underline = _makeElement('div', 'underline')
 
     const hourCardContainer = _makeElement('div','hour-card-container')
 
@@ -168,6 +169,7 @@ const createMainContentDom = () => {
     tabDiv.appendChild(windButton)
     tabDiv.appendChild(precipitationButton)
     tabDiv.appendChild(uvButton)
+    tabDiv.appendChild(underline)
 
     bottomContent.appendChild(tabDiv)
     bottomContent.appendChild(hourCardContainer)

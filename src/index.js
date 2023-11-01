@@ -159,13 +159,19 @@ mediaQueryList.addEventListener('change', (event) => {
 });
 
 const clickButton = (e) => {
-  console.log(e)
   if (e.target === currentButton) {
     return
   }
   currentButton.classList.remove('selected')
   e.target.classList.add('selected')
   currentButton = e.target
+
+  // Move Underline
+  const buttonRect = currentButton.getBoundingClientRect();
+  const underlineOffset = buttonRect.left - document.getElementById('button-temperature').getBoundingClientRect().left;
+  underline.style.width = currentButton.offsetWidth + 'px';
+  underline.style.transform = `translateX(${underlineOffset}px)`;
+
   if (e.target === document.getElementById('button-temperature')) {
     displayHourTemp(selectedDay)
   } else if (e.target === document.getElementById('button-wind')) {

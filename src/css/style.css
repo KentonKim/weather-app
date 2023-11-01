@@ -275,6 +275,12 @@ button:focus, input:focus {
     background-color: var(--transparent-light);
 }
 
+#underline {
+    height: 2px;
+    background-color: blue;
+    transition: all var(--transition-slow) ease;
+}
+
 #hour-card-container {
     width: 100%;
     flex: 1;
