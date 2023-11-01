@@ -15,6 +15,5 @@ https://www.svgrepo.com/page/licensing/#CC%20Attribution
 
 TODO
 - smooth transitions
-- add day of week to main content (selectADay)
 - select a button (temperature / wind speed / precipitation / uv)
     / display ( temperature / wind speed / precipitation / uv)

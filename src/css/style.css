@@ -244,7 +244,7 @@ button:focus, input:focus {
 }
 
 #content-bottom {
-    height: 200px;
+    height: 180px;
     display: flex;
     flex-flow: column;
     align-items: stretch;
@@ -282,15 +282,30 @@ button:focus, input:focus {
     grid-auto-flow: column;
     align-items: stretch;
     overflow-x: auto;
+    overflow-y: clip;
     background-color: var(--transparent-light);
 }
 
 .hour-card {
     width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hour-card-icon {
+    /* width: 60px; */
+    margin: -10px;
 }
 
 .hour-card-time {
     font-size: 2rem;
+    text-align: center;
+}
+
+.hour-card-text {
+    font-size: 3rem;
     text-align: center;
 }
 
@@ -306,6 +321,8 @@ button:focus, input:focus {
 .card {
     height: 120px;
     position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
     background-color: transparent; 
     display: flex;
     justify-content: space-between;
