@@ -156,9 +156,6 @@ mediaQueryList.addEventListener('change', (event) => {
 });
 
 const clickButton = (e) => {
-  if (e.target === currentButton) {
-    return
-  }
   currentButton = e.target
 
   // Move Underline
