@@ -22,7 +22,7 @@
     --transition-fast: 0.1s;
     --transition-med: 0.15s;
     --transition-slow: 0.2s;
-    --alice-blule: invert(89%) sepia(24%) saturate(203%) hue-rotate(191deg) brightness(103%) contrast(101%);
+    --alice-blue: invert(89%) sepia(24%) saturate(203%) hue-rotate(191deg) brightness(103%) contrast(101%);
 }
 
 
@@ -121,7 +121,7 @@ button:focus, input:focus {
 }
 
 #search-icon {
-    filter: var(--alice-blule);
+    filter: var(--alice-blue);
 }
 
 #search-input {
@@ -204,8 +204,8 @@ button:focus, input:focus {
 }
 
 .content-icon {
-    width: 50px;
-    filter: var(--alice-blule)
+    width: 80px;
+    filter: var(--alice-blue)
 }
 
 #content-main-container {
@@ -223,10 +223,6 @@ button:focus, input:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.content-main > img {
-    width: 80px;
 }
 
 .content-main > div {
@@ -279,6 +275,11 @@ button:focus, input:focus {
 
 .hour-card {
     width: 120px;
+}
+
+.hour-card-time {
+    font-size: 2rem;
+    text-align: center;
 }
 
 /* Right side */
@@ -398,5 +399,9 @@ button:focus, input:focus {
 
     .content-main > div {
         font-size: 2rem;
+    }
+
+    .content-icon {
+        width: 60px;
     }
 }

@@ -123,8 +123,18 @@ const createMainContentDom = () => {
 
     // add cards
     for (let i = 0; i < 24; i += 1) {
+        let hour = i+1 <= 12 ? i+1 : i - 11; // Convert to 12-hour format
+        if (hour === 0) {
+            hour = 12; // Replace 0 with 12 for 12 AM
+        }
+        let period = i < 12 || i === 24 ? 'AM' : 'PM'; // Determine AM or PM
+
+        let hourCardTime = _makeElement('div', `hour-card-time-${i}`)
+        hourCardTime.textContent = `${hour} ${period}`
+        hourCardTime.classList.add('hour-card-time')
         let hourCard = _makeElement('div', `hour-card-${i}`)
         hourCard.classList.add('hour-card')
+        hourCard.appendChild(hourCardTime)
         hourCardContainer.appendChild(hourCard)
     }
 
