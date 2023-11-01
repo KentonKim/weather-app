@@ -21,10 +21,7 @@ const formatWeatherData = (weatherData) => {
             element.weekday = dateTime.weekday
             element.weekdayLong = dateTime.weekdayLong
             element.weekdayShort = dateTime.weekdayShort
-            element.maxF = Math.round(element.day.maxtemp_f)
-            element.maxC = Math.round(element.day.maxtemp_c)
-            element.minF = Math.round(element.day.mintemp_f) 
-            element.minC = Math.round(element.day.mintemp_c) 
+
         })
     return daysForecast
     } catch(error) {
