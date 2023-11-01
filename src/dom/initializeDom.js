@@ -133,8 +133,14 @@ const createMainContentDom = () => {
         let hourCardTime = _makeElement('div', `hour-card-time-${i}`)
         hourCardTime.textContent = `${hour} ${period}`
         hourCardTime.classList.add('hour-card-time')
+        let hourCardIcon = _makeElement('img', `hour-card-icon-${i}`)
+        hourCardIcon.classList.add('hour-card-icon')
+        let hourCardText = _makeElement('div', `hour-card-text-${i}`)
+        hourCardText.classList.add('hour-card-text')
         let hourCard = _makeElement('div', `hour-card-${i}`)
         hourCard.classList.add('hour-card')
+        hourCard.appendChild(hourCardText)
+        hourCard.appendChild(hourCardIcon)
         hourCard.appendChild(hourCardTime)
         hourCardContainer.appendChild(hourCard)
     }
