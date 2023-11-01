@@ -28,6 +28,7 @@ const displayToggleData = (usUnit, metricUnit, element) => {
 }
 
 const displayMainInfo = (dayObj) => {
+    console.log(dayObj)
     displayWallpaper(document.body, dayObj.day.condition.code)
 
     // Icon

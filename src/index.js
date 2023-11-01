@@ -31,7 +31,6 @@ let formattedWeatherData = []
 let selectedCard = document.getElementById('card-1') // anything but card-0
 let currentButton = document.getElementById('button-uv') // anything but temp button
 let selectedDay
-let selectADay
 
 // Check for window width
 const mediaQueryList = window.matchMedia('(max-width: 900px)');
@@ -39,7 +38,6 @@ const mediaQueryList = window.matchMedia('(max-width: 900px)');
 // Navbar with search and toggle temperature measurement option
 const form = document.getElementById('search-form')
 const forminput = document.getElementById('search-input')
-const mainTemp = document.getElementById('main-temperature')
 
 // Toggle Temperature
 const radioC = document.getElementById('radio-c')
@@ -81,23 +79,31 @@ const searchLocation = async (query) => {
 // Initialize once
 searchLocation('Cypress')
   .then(() => {
-    // Assign function to value
-    selectADay = (card, dataArray) => {
-        try {
-          selectedCard.classList.remove('selected')
-        } catch (error) {
-          console.log(error)
-          return
-        }
-        card.classList.add('selected')
-        selectedCard = card
-        let number = parseInt(card.getAttribute('data-index'), 10)
-        let dayData = dataArray[number] 
-        displayMainInfo(dayData)
+    // Create function after data is called
+    let selectADay = (card, data) => {
+      if (card === selectedCard || card.parentElement === selectedCard) {
+        return
+      }
+      let cardref = card
+      if (!cardref.classList.contains('card')) {
+        cardref = cardref.parentElement
+      }
+      selectedCard.classList.remove('selected')
+      cardref.classList.add('selected')
+      selectedCard = cardref
+      selectedDay = data 
+      displayMainInfo(selectedDay)
+      temperatureButton.click()
+    }
+
+    // Add event listener for each card
+    const cardArray = document.querySelectorAll('.card')
+    for (let i = 0; i < cardArray.length; i += 1) {
+      let card = cardArray[i]
+      card.addEventListener('mouseup', (e) => selectADay(e.target, formattedWeatherData[i]))
     }
     // Initialize once
-    selectADay(document.getElementById('card-0'), formattedWeatherData)
-    temperatureButton.click()
+    selectADay(document.getElementById('card-0'), formattedWeatherData[0])
   })
 
 
@@ -109,13 +115,6 @@ form.addEventListener('submit', (e) => {
   forminput.value = ''
   searchLocation(formValue)
 })
-
-// Add event listener for each card
-const cardArray = document.querySelectorAll('.card')
-for (let card of cardArray) {
-  console.log(formattedWeatherData)
-  card.addEventListener('mouseup', (e) => selectADay(e.target, formattedWeatherData))
-}
 
 const toggleUnits = (dataArray, isShort) => {
   try {
@@ -147,8 +146,6 @@ radioF.onclick = () => {
 //  setDOM(mainTemp, setTemp, [selectedDay, radioF])
 }
 
-
-
 // Add an event listener for changing from full weekday name to abbreviated 
 mediaQueryList.addEventListener('change', (event) => {
   for (let i = 0; i < formattedWeatherData.length; i += 1) {
@@ -170,6 +167,7 @@ const clickButton = (e) => {
   underline.style.width = currentButton.offsetWidth + 'px';
   underline.style.transform = `translateX(${underlineOffset}px)`;
 
+  // Display info
   if (e.target === document.getElementById('button-temperature')) {
     displayHourTemp(selectedDay)
   } else if (e.target === document.getElementById('button-wind')) {
