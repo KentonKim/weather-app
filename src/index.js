@@ -4,7 +4,7 @@ import { getWeatherData } from './data/getData'
 import showNotification from './dom/showNotification'
 import formatWeatherData from './data/formatWeatherData'
 import {displayCardInfo, displayDayOfWeek, displayTemp} from './displayCardInfo'
-import {displayMainInfo, displayMainTemperature, displayWindSpeed } from './displayMainInfo'
+import {displayHourPrecip, displayHourTemp, displayHourUV, displayHourWind, displayMainInfo, displayMainTemperature, displayToggleData} from './displayMainInfo'
 import displayLocation from './displayLocation'
 
 // Setup main page
@@ -28,8 +28,10 @@ for (let i = 0; i < 7; i += 1) {
 
 // Setup data
 let formattedWeatherData = []
-let selectedCard = document.getElementById('card-1') // Anything except first card
+let selectedCard = document.getElementById('card-1') // anything but card-0
+let currentButton = document.getElementById('button-uv') // anything but temp button
 let selectedDay
+let selectADay
 
 // Check for window width
 const mediaQueryList = window.matchMedia('(max-width: 900px)');
@@ -37,10 +39,17 @@ const mediaQueryList = window.matchMedia('(max-width: 900px)');
 // Navbar with search and toggle temperature measurement option
 const form = document.getElementById('search-form')
 const forminput = document.getElementById('search-input')
+const mainTemp = document.getElementById('main-temperature')
 
 // Toggle Temperature
 const radioC = document.getElementById('radio-c')
 const radioF = document.getElementById('radio-f')
+
+// Toggle Hour Information
+const temperatureButton = document.getElementById('button-temperature')
+const windButton = document.getElementById('button-wind')
+const precipitationButton = document.getElementById('button-precipitation')
+const uvButton = document.getElementById('button-uv')
 
 const searchLocation = async (query) => {
   try {
@@ -72,32 +81,25 @@ const searchLocation = async (query) => {
 // Initialize once
 searchLocation('Cypress')
   .then(() => {
-    // Create function after data is called
-    let selectADay = (card, data) => {
-      if (card === selectedCard || card.parentElement === selectedCard) {
-        return
-      }
-      let cardref = card
-      if (!cardref.classList.contains('card')) {
-        cardref = cardref.parentElement
-      }
-      selectedCard.classList.remove('selected')
-      cardref.classList.add('selected')
-      selectedCard = cardref
-      selectedDay = data 
-      displayMainInfo(selectedDay)
+    // Assign function to value
+    selectADay = (card, dataArray) => {
+        try {
+          selectedCard.classList.remove('selected')
+        } catch (error) {
+          console.log(error)
+          return
+        }
+        card.classList.add('selected')
+        selectedCard = card
+        let number = parseInt(card.getAttribute('data-index'), 10)
+        let dayData = dataArray[number] 
+        displayMainInfo(dayData)
     }
-
-    // Add event listener for each card
-    const cardArray = document.querySelectorAll('.card')
-    for (let i = 0; i < cardArray.length; i += 1) {
-      let card = cardArray[i]
-      card.addEventListener('mouseup', (e) => selectADay(e.target, formattedWeatherData[i]))
-    }
-
     // Initialize once
-    selectADay(document.getElementById('card-0'), formattedWeatherData[0])
+    selectADay(document.getElementById('card-0'), formattedWeatherData)
+    temperatureButton.click()
   })
+
 
 // New location
 form.addEventListener('submit', (e) => {
@@ -107,6 +109,13 @@ form.addEventListener('submit', (e) => {
   forminput.value = ''
   searchLocation(formValue)
 })
+
+// Add event listener for each card
+const cardArray = document.querySelectorAll('.card')
+for (let card of cardArray) {
+  console.log(formattedWeatherData)
+  card.addEventListener('mouseup', (e) => selectADay(e.target, formattedWeatherData))
+}
 
 const toggleUnits = (dataArray, isShort) => {
   try {
@@ -138,6 +147,8 @@ radioF.onclick = () => {
 //  setDOM(mainTemp, setTemp, [selectedDay, radioF])
 }
 
+
+
 // Add an event listener for changing from full weekday name to abbreviated 
 mediaQueryList.addEventListener('change', (event) => {
   for (let i = 0; i < formattedWeatherData.length; i += 1) {
@@ -146,3 +157,27 @@ mediaQueryList.addEventListener('change', (event) => {
     displayTemp(dayObj, document.getElementById(`card-temperature-${i}`), event.matches)
   }
 });
+
+const clickButton = (e) => {
+  console.log(e)
+  if (e.target === currentButton) {
+    return
+  }
+  currentButton.classList.remove('selected')
+  e.target.classList.add('selected')
+  currentButton = e.target
+  if (e.target === document.getElementById('button-temperature')) {
+    displayHourTemp(selectedDay)
+  } else if (e.target === document.getElementById('button-wind')) {
+    displayHourWind(selectedDay)
+  } else if (e.target === document.getElementById('button-precipitation')) {
+    displayHourPrecip(selectedDay)
+  } else {
+    displayHourUV(selectedDay)
+  }
+}
+
+precipitationButton.onclick = clickButton
+temperatureButton.onclick = clickButton
+windButton.onclick = clickButton
+uvButton.onclick = clickButton 

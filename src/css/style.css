@@ -270,7 +270,7 @@ button:focus, input:focus {
     background-color: var(--transparent-light-lightlight);
 } */
 
-.tab-button:focus {
+.tab-button:focus, .tab-button.selected {
     color: var(--font-white);
     background-color: var(--transparent-light);
 }

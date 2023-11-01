@@ -19,11 +19,11 @@ const displayHourCardTemperature = (hourObj, element) => {
     }
 }
 
-const displayWindSpeed = (mph, kph, element) => {
+const displayToggleData = (usUnit, metricUnit, element) => {
     if (isToggledF()) {
-        displayData(mph, element)
+        displayData(usUnit, element)
     } else {
-        displayData(kph, element)
+        displayData(metricUnit, element)
     }
 }
 
@@ -49,15 +49,13 @@ const displayMainInfo = (dayObj) => {
     const windText = document.getElementById('wind-text')
     const windMphData = `${Math.round(dayObj.day.maxwind_mph)} mph`
     const windKphData = `${Math.round(dayObj.day.maxwind_kph)} kph`
-    displayWindSpeed(windMphData, windKphData, windText)
+    displayToggleData(windMphData, windKphData, windText)
     const snowText = document.getElementById('snow-text')
     const snowData = `${dayObj.day.daily_chance_of_snow}%`
     displayData(snowData, snowText)
     const rainText = document.getElementById('rain-text')
     const rainData = `${dayObj.day.daily_chance_of_rain}%`
     displayData(rainData, rainText)
-
-    displayHourTemp(dayObj)
 }
 
 const displayHourTemp = (dayObj) => {
@@ -70,6 +68,35 @@ const displayHourTemp = (dayObj) => {
     }
 }
 
+const displayHourWind = (dayObj) => {
+    const hourCardIconArray = document.querySelectorAll('.hour-card-icon')
+    const hourCardTextArray = document.querySelectorAll('.hour-card-text')
+
+    for (let i = 0; i < hourCardIconArray.length; i += 1) {
+        displayToggleData(dayObj.hour[i].wind_mph, dayObj.hour[i].wind_kph, hourCardTextArray[i])
+        // displayIcon(dayObj.hour[i].condition.icon, hourCardIconArray[i])
+    }
+}
+
+const displayHourPrecip = (dayObj) => {
+    const hourCardIconArray = document.querySelectorAll('.hour-card-icon')
+    const hourCardTextArray = document.querySelectorAll('.hour-card-text')
+
+    for (let i = 0; i < hourCardIconArray.length; i += 1) {
+        displayToggleData(dayObj.hour[i].precip_in, dayObj.hour[i].precip_mm, hourCardTextArray[i])
+        // displayIcon(dayObj.hour[i].condition.icon, hourCardIconArray[i])
+    }
+}
+
+const displayHourUV = (dayObj) => {
+    const hourCardIconArray = document.querySelectorAll('.hour-card-icon')
+    const hourCardTextArray = document.querySelectorAll('.hour-card-text')
+
+    for (let i = 0; i < hourCardIconArray.length; i += 1) {
+        displayData(dayObj.hour[i].uv, hourCardTextArray[i])
+    }
+}
 
 
-export {displayMainInfo, displayWindSpeed, displayMainTemperature}
+
+export {displayMainInfo, displayToggleData, displayMainTemperature, displayHourTemp, displayHourWind, displayHourPrecip, displayHourUV}
