@@ -80,7 +80,12 @@ button:focus, input:focus {
     justify-content: center;
     align-items: center;
     overflow: clip;
+    transition: background-color var(--transition-med) ease-in-out;
 }
+
+#toggle-temp-container:hover, #search-form:has(#search-input:focus) {
+    background-color: var(--transparent-light);
+} 
 
 #toggle-temp-container > * {
     color: var(--grey);
@@ -118,6 +123,7 @@ button:focus, input:focus {
     padding-left: 2rem;
     margin: 0;
     background-color: var(--transparent-light-light);
+    transition: background-color var(--transition-med) ease-in-out;
 }
 
 #search-icon {
@@ -319,8 +325,6 @@ button:focus, input:focus {
 
 .card:active, .card.selected {
     background-color: var(--transparent-dark);
-    border: 1px solid var(--transparent-dark);
-    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3);
 }
 
 .notification {
