@@ -11,7 +11,10 @@ Snow icon by Xnix Circular Interface Icons
 https://www.svgrepo.com/page/licensing/#CC%20Attribution 
 
 
-to d- select card fxn
-- select tempereature / wind / precip / uv fxn
-    - display hour info
-        - display correct hour info
+
+
+TODO
+- smooth transitions
+- add day of week to main content (selectADay)
+- select a button (temperature / wind speed / precipitation / uv)
+    / display ( temperature / wind speed / precipitation / uv)
