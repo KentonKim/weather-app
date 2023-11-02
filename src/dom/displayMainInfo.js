@@ -1,5 +1,4 @@
-import displayWallpaper from './dom/displayWallpaper'
-import isToggledF from './isToggledF'
+import isToggledF from '../isToggledF'
 import { displayData, displayIcon } from './displayCore'
 import { returnUvIcon, returnWindIcon} from './returnHourIcon'
 
@@ -28,7 +27,9 @@ const displayToggleData = (usUnit, metricUnit, element) => {
 }
 
 const displayMainInfo = (dayObj) => {
-    displayWallpaper(document.body, dayObj.day.condition.code)
+    // DEPRECATED
+    // displayWallpaper(document.body, dayObj.day.condition.code)
+    // Display wallpaper now changes with search
 
     // Icon
     const mainIcon = document.getElementById('main-icon')
@@ -62,10 +63,14 @@ const displayHourTemp = (dayObj) => {
     const hourCardIconArray = document.querySelectorAll('.hour-card-icon')
     const hourCardTextArray = document.querySelectorAll('.hour-card-text')
 
-    for (let i = 0; i < hourCardIconArray.length; i += 1) {
-        hourCardIconArray[i].classList.remove('wind')
-        displayHourCardTemperature(dayObj.hour[i], hourCardTextArray[i])
-        displayIcon(dayObj.hour[i].condition.icon, hourCardIconArray[i])
+    try {
+        for (let i = 0; i < hourCardIconArray.length; i += 1) {
+            hourCardIconArray[i].classList.remove('wind')
+            displayHourCardTemperature(dayObj.hour[i], hourCardTextArray[i])
+            displayIcon(dayObj.hour[i].condition.icon, hourCardIconArray[i])
+        }
+    } catch (error){
+        console.log(error) // dayobj is undefined when first initializing 
     }
 }
 

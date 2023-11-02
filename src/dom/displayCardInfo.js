@@ -1,5 +1,5 @@
 import { displayData } from "./displayCore";
-import isToggledF from "./isToggledF";
+import isToggledF from "../isToggledF";
 
 const displayDayOfWeek = (dayObj, element, isShort = false) => {
     if (isShort) {

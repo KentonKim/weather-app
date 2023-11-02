@@ -1,11 +1,12 @@
 import './css/style.css'
 import * as createDom from './dom/initializeDom'
-import { getWeatherData } from './data/getData'
+import { getUnsplashData, getWeatherData } from './data/getData'
 import showNotification from './dom/showNotification'
 import formatWeatherData from './data/formatWeatherData'
-import {displayCardInfo, displayDayOfWeek, displayTemp} from './displayCardInfo'
-import {displayHourPrecip, displayHourTemp, displayHourUV, displayHourWind, displayMainInfo, displayMainTemperature, displayToggleData} from './displayMainInfo'
-import displayLocation from './displayLocation'
+import {displayCardInfo, displayDayOfWeek, displayTemp} from './dom/displayCardInfo'
+import {displayHourPrecip, displayHourTemp, displayHourUV, displayHourWind, displayMainInfo, displayMainTemperature, displayToggleData} from './dom/displayMainInfo'
+import displayLocation from './dom/displayLocation'
+import displayWallpaper from './dom/displayWallpaper'
 
 // Setup main page
 const [leftmain, rightmain] = createDom.createMainDom()
@@ -105,6 +106,8 @@ const searchLocation = async (query) => {
 
     // fill out location
     displayLocation(weatherData.location)
+    // fill out wallpaper
+    displayWallpaper(document.body, weatherData.location.name + " " + weatherData.location.region)
     // display the first day
     selectADay(document.getElementById('card-0'), formattedWeatherData[0])
     selectedDay = formattedWeatherData[0]
@@ -194,4 +197,5 @@ mediaQueryList.addEventListener('change', (event) => {
     displayTemp(dayObj, document.getElementById(`card-temperature-${i}`), event.matches)
   }
 });
+
 

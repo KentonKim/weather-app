@@ -1,3 +1,5 @@
+import { getUnsplashData } from "../data/getData"
+/*
 import Sunny1 from '../wallpapers/sunny01.jpg'
 import Sunny2 from '../wallpapers/sunny02.jpg'
 import Sunny3 from '../wallpapers/sunny03.jpg'
@@ -19,6 +21,7 @@ const sunnyPics = [Sunny1, Sunny2, Sunny3, Sunny4]
 const snowyPics = [Snowy1, Snowy2, Snowy3, Snowy4]
 const cloudyPics = [Cloudy1, Cloudy2, Cloudy3, Cloudy4]
 const rainyPics = [Rainy1, Rainy2, Rainy3, Rainy4]
+
 
 const displayWallpaper = (parentDiv, code) => {
     const weatherPics = _determineWallpaper(code) 
@@ -60,5 +63,15 @@ const _determineWallpaper = (condition) => {
 const getRandNum = () => {
     return Math.floor(Math.random()*4)
 } 
+*/
+
+const displayWallpaper = (parentDiv, location) => {
+    getUnsplashData(location)
+    .then( (resolve) => {
+        parentDiv.style.backgroundImage = `url(${resolve})`
+    }).catch ( (error) => {
+        console.log(error)
+    })
+}
 
 export default displayWallpaper 

@@ -21,7 +21,6 @@ const formatWeatherData = (weatherData) => {
             element.weekday = dateTime.weekday
             element.weekdayLong = dateTime.weekdayLong
             element.weekdayShort = dateTime.weekdayShort
-
         })
     return daysForecast
     } catch(error) {
