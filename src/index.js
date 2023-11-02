@@ -49,112 +49,7 @@ const windButton = document.getElementById('button-wind')
 const precipitationButton = document.getElementById('button-precipitation')
 const uvButton = document.getElementById('button-uv')
 
-const searchLocation = async (query) => {
-  try {
-    const weatherData = await getWeatherData(query)
-    formattedWeatherData = formatWeatherData(weatherData)
-
-    // fill out the cards with info
-    const cardArray = document.querySelectorAll('.card')
-    for (let card of cardArray) {
-      displayCardInfo(card, formattedWeatherData, mediaQueryList.matches)
-    }
-
-    // fill out location
-    displayLocation(weatherData.location)
-    // display the first day
-    displayMainInfo(formattedWeatherData[0])
-    selectedDay = formattedWeatherData[0]
-
-    console.log(weatherData)
-    console.log(formattedWeatherData)
-  } catch (error) {
-    if (error.code && error.code === 1006) {
-      showNotification('Location not found')
-    }
-    console.log(error)
-  }
-}
-
-// Initialize once
-searchLocation('Cypress')
-  .then(() => {
-    // Create function after data is called
-    let selectADay = (card, data) => {
-      if (card === selectedCard || card.parentElement === selectedCard) {
-        return
-      }
-      let cardref = card
-      if (!cardref.classList.contains('card')) {
-        cardref = cardref.parentElement
-      }
-      selectedCard.classList.remove('selected')
-      cardref.classList.add('selected')
-      selectedCard = cardref
-      selectedDay = data 
-      displayMainInfo(selectedDay)
-      temperatureButton.click()
-    }
-
-    // Add event listener for each card
-    const cardArray = document.querySelectorAll('.card')
-    for (let i = 0; i < cardArray.length; i += 1) {
-      let card = cardArray[i]
-      card.addEventListener('mouseup', (e) => selectADay(e.target, formattedWeatherData[i]))
-    }
-    // Initialize once
-    selectADay(document.getElementById('card-0'), formattedWeatherData[0])
-  })
-
-
-// New location
-form.addEventListener('submit', (e) => {
-  e.preventDefault()
-  // Reset day data 
-  const formValue = forminput.value
-  forminput.value = ''
-  searchLocation(formValue)
-})
-
-const toggleUnits = (dataArray, isShort) => {
-  try {
-    for (let i = 0; i < dataArray.length; i += 1) {
-        let cardTemperature = document.getElementById(`card-temperature-${i}`)
-        displayTemp(dataArray[i], cardTemperature, isShort)
-    }
-
-    // console.log(selectedDay)
-    // For main
-    const windText = document.getElementById('wind-text')
-    const windMphData = `${Math.round(selectedDay.day.maxwind_mph)} mph`
-    const windKphData = `${Math.round(selectedDay.day.maxwind_kph)} kph`
-    displayWindSpeed(windMphData, windKphData, windText)
-    const mainTemperature = document.getElementById('main-temperature')
-    displayMainTemperature(selectedDay, mainTemperature)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-radioC.onclick = () => {
-  toggleUnits(formattedWeatherData, mediaQueryList.matches)
-//  setDOM(mainTemp, setTemp, [selectedDay, radioF])
-}
-
-radioF.onclick = () => {
-  toggleUnits(formattedWeatherData, mediaQueryList.matches)
-//  setDOM(mainTemp, setTemp, [selectedDay, radioF])
-}
-
-// Add an event listener for changing from full weekday name to abbreviated 
-mediaQueryList.addEventListener('change', (event) => {
-  for (let i = 0; i < formattedWeatherData.length; i += 1) {
-    let dayObj = formattedWeatherData[i]
-    displayDayOfWeek(dayObj, document.getElementById(`card-weekday-${i}`), event.matches)
-    displayTemp(dayObj, document.getElementById(`card-temperature-${i}`), event.matches)
-  }
-});
-
+// hour buttons
 const clickButton = (e) => {
   currentButton = e.target
 
@@ -180,3 +75,123 @@ precipitationButton.onclick = clickButton
 temperatureButton.onclick = clickButton
 windButton.onclick = clickButton
 uvButton.onclick = clickButton 
+
+let selectADay = (card, data) => {
+  temperatureButton.click()
+  if (card === selectedCard || card.parentElement === selectedCard) {
+    return
+  }
+  let cardref = card
+  if (!cardref.classList.contains('card')) {
+    cardref = cardref.parentElement
+  }
+  selectedCard.classList.remove('selected')
+  cardref.classList.add('selected')
+  selectedCard = cardref
+  selectedDay = data 
+  displayMainInfo(selectedDay)
+}
+
+const searchLocation = async (query) => {
+  try {
+    const weatherData = await getWeatherData(query)
+    formattedWeatherData = await formatWeatherData(weatherData)
+
+    // fill out the cards with info
+    const cardArray = document.querySelectorAll('.card')
+    for (let card of cardArray) {
+      displayCardInfo(card, formattedWeatherData, mediaQueryList.matches)
+    }
+
+    // fill out location
+    displayLocation(weatherData.location)
+    // display the first day
+    selectADay(document.getElementById('card-0'), formattedWeatherData[0])
+    selectedDay = formattedWeatherData[0]
+
+    console.log(weatherData)
+    console.log(formattedWeatherData)
+  } catch (error) {
+    if (error.code && error.code === 1006) {
+      showNotification('Location not found')
+    }
+    console.log(error)
+  } finally {
+    return formattedWeatherData
+  }
+}
+
+// Initialize once
+searchLocation('Cypress')
+  .then((resolvedData) => {
+    // Add event listener for each card
+    const cardArray = document.querySelectorAll('.card')
+    for (let i = 0; i < cardArray.length; i += 1) {
+      let card = cardArray[i]
+      card.addEventListener('mouseup', (e) => selectADay(e.target, resolvedData[i]))
+    }
+    // Initialize once
+    selectADay(document.getElementById('card-0'), resolvedData[0])
+  })
+
+
+// New location
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  // Reset day data 
+  const formValue = forminput.value
+  forminput.value = ''
+  searchLocation(formValue)
+})
+
+const toggleUnits = (dataArray, isShort) => {
+  try {
+    for (let i = 0; i < dataArray.length; i += 1) {
+        let cardTemperature = document.getElementById(`card-temperature-${i}`)
+        displayTemp(dataArray[i], cardTemperature, isShort)
+    }
+
+    // console.log(selectedDay)
+    // For main
+    const windText = document.getElementById('wind-text')
+    const windMphData = `${Math.round(selectedDay.day.maxwind_mph)} mph`
+    const windKphData = `${Math.round(selectedDay.day.maxwind_kph)} kph`
+    displayToggleData(windMphData, windKphData, windText)
+    const mainTemperature = document.getElementById('main-temperature')
+    displayMainTemperature(selectedDay, mainTemperature)
+
+    // For hour cards
+    if (currentButton === document.getElementById('button-temperature')) {
+      displayHourTemp(selectedDay)
+    } else if (currentButton=== document.getElementById('button-wind')) {
+      displayHourWind(selectedDay)
+    } else if (currentButton === document.getElementById('button-precipitation')) {
+      displayHourPrecip(selectedDay)
+    } else {
+      displayHourUV(selectedDay)
+    }
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+radioC.onclick = () => {
+  toggleUnits(formattedWeatherData, mediaQueryList.matches)
+//  setDOM(mainTemp, setTemp, [selectedDay, radioF])
+}
+
+radioF.onclick = () => {
+  toggleUnits(formattedWeatherData, mediaQueryList.matches)
+//  setDOM(mainTemp, setTemp, [selectedDay, radioF])
+}
+
+// Add an event listener for changing from full weekday name to abbreviated 
+mediaQueryList.addEventListener('change', (event) => {
+  for (let i = 0; i < formattedWeatherData.length; i += 1) {
+    let dayObj = formattedWeatherData[i]
+    displayDayOfWeek(dayObj, document.getElementById(`card-weekday-${i}`), event.matches)
+    displayTemp(dayObj, document.getElementById(`card-temperature-${i}`), event.matches)
+  }
+});
+

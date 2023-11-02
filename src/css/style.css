@@ -9,6 +9,7 @@
     margin: 0;
     color: aliceblue;
     user-select: none;
+    transition: opacity var(--transition-slow) ease;
 }
 
 :root {
@@ -293,8 +294,12 @@ button:focus, input:focus {
 }
 
 .hour-card-icon {
-    /* width: 60px; */
+    width: 64px;
     margin: -10px;
+}
+
+.hour-card-icon.wind {
+    filter: var(--alice-blue);
 }
 
 .hour-card-time {
@@ -303,7 +308,7 @@ button:focus, input:focus {
 }
 
 .hour-card-text {
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
 }
 

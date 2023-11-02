@@ -1,7 +1,7 @@
 import displayWallpaper from './dom/displayWallpaper'
 import isToggledF from './isToggledF'
 import { displayData, displayIcon } from './displayCore'
-
+import { returnUvIcon, returnWindIcon} from './returnHourIcon'
 
 const displayMainTemperature = (dayObj, element) => {
     if (isToggledF()) {
@@ -28,7 +28,6 @@ const displayToggleData = (usUnit, metricUnit, element) => {
 }
 
 const displayMainInfo = (dayObj) => {
-    console.log(dayObj)
     displayWallpaper(document.body, dayObj.day.condition.code)
 
     // Icon
@@ -64,6 +63,7 @@ const displayHourTemp = (dayObj) => {
     const hourCardTextArray = document.querySelectorAll('.hour-card-text')
 
     for (let i = 0; i < hourCardIconArray.length; i += 1) {
+        hourCardIconArray[i].classList.remove('wind')
         displayHourCardTemperature(dayObj.hour[i], hourCardTextArray[i])
         displayIcon(dayObj.hour[i].condition.icon, hourCardIconArray[i])
     }
@@ -74,8 +74,10 @@ const displayHourWind = (dayObj) => {
     const hourCardTextArray = document.querySelectorAll('.hour-card-text')
 
     for (let i = 0; i < hourCardIconArray.length; i += 1) {
-        displayToggleData(dayObj.hour[i].wind_mph, dayObj.hour[i].wind_kph, hourCardTextArray[i])
-        // displayIcon(dayObj.hour[i].condition.icon, hourCardIconArray[i])
+        hourCardIconArray[i].classList.add('wind')
+        let image = returnWindIcon(dayObj.hour[i].wind_dir)  
+        displayIcon(image, hourCardIconArray[i])
+        displayToggleData(`${dayObj.hour[i].wind_mph} mph`, `${dayObj.hour[i].wind_kph} kph`, hourCardTextArray[i])
     }
 }
 
@@ -84,8 +86,9 @@ const displayHourPrecip = (dayObj) => {
     const hourCardTextArray = document.querySelectorAll('.hour-card-text')
 
     for (let i = 0; i < hourCardIconArray.length; i += 1) {
-        displayToggleData(dayObj.hour[i].precip_in, dayObj.hour[i].precip_mm, hourCardTextArray[i])
-        // displayIcon(dayObj.hour[i].condition.icon, hourCardIconArray[i])
+        hourCardIconArray[i].classList.remove('wind')
+        displayToggleData(`${dayObj.hour[i].precip_in} in`, `${dayObj.hour[i].precip_mm} mm`, hourCardTextArray[i])
+        displayIcon(dayObj.hour[i].condition.icon, hourCardIconArray[i])
     }
 }
 
@@ -94,10 +97,11 @@ const displayHourUV = (dayObj) => {
     const hourCardTextArray = document.querySelectorAll('.hour-card-text')
 
     for (let i = 0; i < hourCardIconArray.length; i += 1) {
+        hourCardIconArray[i].classList.remove('wind')
+        let image = returnUvIcon(dayObj.hour[i].uv)  
+        displayIcon(image, hourCardIconArray[i])
         displayData(dayObj.hour[i].uv, hourCardTextArray[i])
     }
 }
-
-
 
 export {displayMainInfo, displayToggleData, displayMainTemperature, displayHourTemp, displayHourWind, displayHourPrecip, displayHourUV}
