@@ -22,7 +22,7 @@ const mainContent = createDom.createMainContentDom()
 leftmain.appendChild(mainContent)
 
 // Setup Cards
-for (let i = 0; i < 7; i += 1) {
+for (let i = 0; i < 3; i += 1) {
   let cardDiv = createDom.createCardDom(i)
   rightmain.appendChild(cardDiv)
 }
@@ -78,6 +78,7 @@ windButton.onclick = clickButton
 uvButton.onclick = clickButton 
 
 let selectADay = (card, data) => {
+  selectedDay = data 
   temperatureButton.click()
   if (card === selectedCard || card.parentElement === selectedCard) {
     return
@@ -89,7 +90,6 @@ let selectADay = (card, data) => {
   selectedCard.classList.remove('selected')
   cardref.classList.add('selected')
   selectedCard = cardref
-  selectedDay = data 
   displayMainInfo(selectedDay)
 }
 
@@ -97,6 +97,8 @@ const searchLocation = async (query) => {
   try {
     const weatherData = await getWeatherData(query)
     formattedWeatherData = await formatWeatherData(weatherData)
+    console.log(weatherData)
+    console.log(formattedWeatherData)
 
     // fill out the cards with info
     const cardArray = document.querySelectorAll('.card')
@@ -112,8 +114,6 @@ const searchLocation = async (query) => {
     selectADay(document.getElementById('card-0'), formattedWeatherData[0])
     selectedDay = formattedWeatherData[0]
 
-    console.log(weatherData)
-    console.log(formattedWeatherData)
   } catch (error) {
     if (error.code && error.code === 1006) {
       showNotification('Location not found')
