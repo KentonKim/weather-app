@@ -1,0 +1,440 @@
+@import './normalize.css';
+@import './skeleton.css';
+
+* {
+    background-color: transparent;
+    /* border: 1px solid blueviolet; */
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color: aliceblue;
+    user-select: none;
+    transition: opacity var(--transition-slow) ease;
+}
+
+:root {
+    /* font-size: medium; */
+    --grey: gray;
+    --transparent-light-light: rgba(0,0,0,0.2);
+    --transparent-light: rgba(0,0,0,0.4);
+    --transparent-med: rgba(0,0,0,0.6);
+    --transparent-dark: rgba(0,0,0,0.7);
+    --font-white: aliceblue;
+    --transition-fast: 0.1s;
+    --transition-med: 0.15s;
+    --transition-slow: 0.2s;
+    --alice-blue: invert(89%) sepia(24%) saturate(203%) hue-rotate(191deg) brightness(103%) contrast(101%);
+}
+
+
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    /* overflow: hidden; */
+}
+
+body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    position: relative;
+    /* background-size: 100% 100%; */
+    background-size: cover;
+}
+
+button, input {
+    border: 0;
+}
+
+button:focus, input:focus {
+    border: 0;
+    outline: none;
+}
+
+#main-left {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    overflow-x: auto; /* auto, hidden works */
+    padding: 10px;
+}
+
+#main-right {
+    overflow-x: auto;
+    overflow-y: clip;
+}
+
+#navbar {
+    display: flex;
+    justify-content: start;
+    gap: 15px;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+#toggle-temp-container {
+    height: 40px;
+    background-color: var(--transparent-light-light);
+    border-radius: 20px;
+    padding: 0 8px;
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    align-items: center;
+    overflow: clip;
+    transition: background-color var(--transition-med) ease-in-out;
+}
+
+#toggle-temp-container:hover, #search-form:has(#search-input:focus) {
+    background-color: var(--transparent-light);
+} 
+
+#toggle-temp-container > * {
+    color: var(--grey);
+    transition: color var(--transition-med) ease-in-out;
+    margin: 0;
+    font-size: 2rem;
+}
+
+#toggle-temp-container > label {
+    cursor: pointer;
+    /* font-size: 2rem; */
+}
+
+#toggle-temp-container > label > input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    /* Not removed via appearance */
+}
+
+#toggle-temp-container > label:has(input[type='radio']:checked) {
+    color: aliceblue;
+    cursor: default;
+}
+
+#search-form {
+    width: 360px;
+    height: 40px;
+    border-radius: 25px;
+    overflow: clip;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    padding-left: 2rem;
+    margin: 0;
+    background-color: var(--transparent-light-light);
+    transition: background-color var(--transition-med) ease-in-out;
+}
+
+#search-icon {
+    filter: var(--alice-blue);
+}
+
+#search-input {
+    height: 100%;
+    border-bottom: 1px solid var(--font-white);
+    flex: 1;
+    font-size: 2rem;
+    padding-bottom: 3px;
+    margin: 0;
+}
+
+#search-button {
+    width: 40px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-button > img {
+    width: 30px;
+}
+
+#content-container {
+    width: 100%;
+    height: 100%;
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+    background-color: var(--transparent-med);
+    display: flex;
+    flex-flow: column;
+    border-radius: 20px;
+    overflow: clip;
+}
+
+#content-top {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    align-content: stretch;
+}
+
+#content-header {
+    display: flex;
+    flex-flow: row;
+    align-content: flex-start;
+}
+
+#location-info {
+    display: flex;
+    flex-flow: column;
+}
+
+#location-name {
+    margin-top: 5px;
+    font-size: 4rem;
+    line-height: 1.3;
+}
+
+#location-country {
+    font-size: 2rem;
+    flex: 1;
+    margin-top: -10px;
+}
+
+#main-temperature {
+    font-size: 7rem;
+    margin-left: auto;
+    margin-right: 15px;
+    margin-top: -10px;
+    transition: all var(--transition-slow) ease;
+}
+
+#main-icon-container {
+    margin-right: 15px;
+    margin-left: 3px;
+}
+
+#main-icon-text {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: -15px;
+}
+
+.content-icon {
+    width: 80px;
+    filter: var(--alice-blue)
+}
+
+#content-main-container {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    overflow-y: auto;
+    padding: 0 20px;
+    gap: 5px;
+}
+
+.content-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-main > div {
+    font-size: 2.5rem;
+    transition: all var(--transition-slow) ease-in-out;
+    text-align: center;
+}
+
+#content-bottom {
+    height: 180px;
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+}
+
+
+.tab-button {
+    height: 100%;
+    color: var(--font-white);
+    margin: 0;
+    margin-bottom: -2px;
+    padding: 0 10px;
+    /* border-radius: 10px 10px 0 0; */
+    border-radius: 0;
+    transition: background-color var(--transition-med) ease;
+    background-color: var(--transparent-light);
+}
+
+.tab-button:focus {
+    color: var(--font-white);
+}
+
+#underline {
+    height: 2px;
+    background-color: aliceblue;
+    transition: all var(--transition-slow) ease;
+}
+
+#hour-card-container {
+    width: 100%;
+    flex: 1;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: stretch;
+    overflow-x: auto;
+    overflow-y: clip;
+    background-color: var(--transparent-light);
+}
+
+.hour-card {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hour-card-icon {
+    width: 64px;
+    margin: -10px;
+}
+
+.hour-card-icon.wind {
+    filter: var(--alice-blue);
+}
+
+.hour-card-time {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.hour-card-text {
+    font-size: 2rem;
+    text-align: center;
+}
+
+/* Right side */
+.card-container {
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.card {
+    height: 120px;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px;
+    padding: 10px;
+    overflow: clip;
+    flex: 1;
+    overflow: hidden;
+    background-color: var(--transparent-light);
+    -webkit-transition: all var(--transition-fast) ease;
+    -moz-transition: all var(--transition-fast) ease;
+    -o-transition: all var(--transition-fast) ease;
+    -ms-transition: all var(--transition-fast) ease;
+    transition: all var(--transition-fast) ease-in-out;
+}
+
+.card, .card > * {
+}
+
+.card:hover {
+    background-color: var(--transparent-med);
+}
+
+.card:active, .card.selected {
+    background-color: var(--transparent-dark);
+}
+
+.notification {
+    position: fixed;
+    left: calc(50% - 200px);
+    top: 10px;
+    transform: translate(-50%,0);
+    background-color: var(--transparent-light);
+    width: min(80%, 400px);
+    text-align: center;
+}
+
+.card-temperature, .card-weekday {
+    font-size: 2.5rem;
+    white-space: pre-line;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    transition: all var(--transition-slow) ease-in-out;
+}
+
+.hidden{
+    opacity: 0;
+}
+
+@keyframes slide-in-out {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    15% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+
+@media (max-width: 900px) {
+    /* /* Your CSS styles for screens with a width less than 600px go here */
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 140px;
+    }
+
+    #main-right, #main-left {
+        width: 100%;
+    }
+
+    .card-container {
+        flex-flow: row;
+    }
+
+    .card {
+        flex-flow: column;
+        /* justify-content: between; */
+        padding: 0px;
+    }
+
+    .card-temperature {
+        white-space: normal;
+    }
+
+  }
+
+@media (max-width: 700px) {
+    .card-temperature {
+        font-size: 1.5rem;
+        margin-bottom: 3px;
+    }
+
+    .content-main > div {
+        font-size: 2rem;
+    }
+
+    .content-icon {
+        width: 60px;
+    }
+}
