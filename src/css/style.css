@@ -40,6 +40,24 @@ body {
     position: relative;
     /* background-size: 100% 100%; */
     background-size: cover;
+    transition: background-color 0.5s ease; /* Specify the property, duration, and timing function */
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease; /* Specify the property, duration, and timing function */
+}
+
+body.loading::before {
+  opacity: 1;
 }
 
 button, input {

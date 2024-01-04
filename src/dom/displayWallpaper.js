@@ -69,7 +69,11 @@ const displayWallpaper = (parentDiv, location) => {
     getUnsplashData(location)
     .then( (resolve) => {
         parentDiv.style.backgroundImage = `url(${resolve})`
-    }).catch ( (error) => {
+    })
+    .then( () => {
+        parentDiv.classList.remove('loading')
+    })
+    .catch ( (error) => {
         console.log(error)
     })
 }

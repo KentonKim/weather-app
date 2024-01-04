@@ -94,22 +94,24 @@ let selectADay = (card, data) => {
 }
 
 const searchLocation = async (query) => {
+  let weatherData
   try {
-    const weatherData = await getWeatherData(query)
+    // fade to black 
+
+    weatherData = await getWeatherData(query)
+    document.body.classList.add('loading')
     formattedWeatherData = await formatWeatherData(weatherData)
-    console.log(weatherData)
-    console.log(formattedWeatherData)
 
     // fill out the cards with info
     const cardArray = document.querySelectorAll('.card')
     for (let card of cardArray) {
       displayCardInfo(card, formattedWeatherData, mediaQueryList.matches)
     }
-
-    // fill out location
-    displayLocation(weatherData.location)
+    console.log('passes get weather deata')
     // fill out wallpaper
     displayWallpaper(document.body, weatherData.location.name + " " + weatherData.location.region)
+    // fill out location
+    displayLocation(weatherData.location)
     // display the first day
     selectADay(document.getElementById('card-0'), formattedWeatherData[0])
     selectedDay = formattedWeatherData[0]
