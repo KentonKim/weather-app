@@ -6,7 +6,7 @@ import formatWeatherData from './data/formatWeatherData'
 import {displayCardInfo, displayDayOfWeek, displayTemp} from './dom/displayCardInfo'
 import {displayHourPrecip, displayHourTemp, displayHourUV, displayHourWind, displayMainInfo, displayMainTemperature, displayToggleData} from './dom/displayMainInfo'
 import displayLocation from './dom/displayLocation'
-import displayWallpaper from './dom/displayWallpaper'
+import getWallpaper from './dom/getWallpaper'
 
 // Setup main page
 const [leftmain, rightmain] = createDom.createMainDom()
@@ -96,26 +96,26 @@ let selectADay = (card, data) => {
 const searchLocation = async (query) => {
   let weatherData
   try {
-    // fade to black 
-
     weatherData = await getWeatherData(query)
-    document.body.classList.add('loading')
     formattedWeatherData = await formatWeatherData(weatherData)
-
+    const wallpaperUrl = await getWallpaper(weatherData.location.name + " " + weatherData.location.region)
+    console.log(wallpaperUrl)
+    document.body.classList.add('loading')
+    await wait300ms()
     // fill out the cards with info
     const cardArray = document.querySelectorAll('.card')
     for (let card of cardArray) {
       displayCardInfo(card, formattedWeatherData, mediaQueryList.matches)
     }
-    console.log('passes get weather deata')
     // fill out wallpaper
-    displayWallpaper(document.body, weatherData.location.name + " " + weatherData.location.region)
+    document.body.style.backgroundImage = `url(${wallpaperUrl})`
     // fill out location
     displayLocation(weatherData.location)
+
     // display the first day
     selectADay(document.getElementById('card-0'), formattedWeatherData[0])
     selectedDay = formattedWeatherData[0]
-
+    document.body.classList.remove('loading')
   } catch (error) {
     if (error.code && error.code === 1006) {
       showNotification('Location not found')
@@ -200,4 +200,6 @@ mediaQueryList.addEventListener('change', (event) => {
   }
 });
 
-
+function wait300ms() {
+  return new Promise(resolve => setTimeout(resolve, 300));
+}

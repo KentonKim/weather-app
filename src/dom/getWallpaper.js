@@ -65,17 +65,14 @@ const getRandNum = () => {
 } 
 */
 
-const displayWallpaper = (parentDiv, location) => {
-    getUnsplashData(location)
-    .then( (resolve) => {
-        parentDiv.style.backgroundImage = `url(${resolve})`
-    })
-    .then( () => {
-        parentDiv.classList.remove('loading')
-    })
-    .catch ( (error) => {
-        console.log(error)
-    })
-}
 
-export default displayWallpaper 
+const getWallpaper = async (location) => {
+  try {
+    const resolve = await getUnsplashData(location);
+    return resolve; // Assuming getUnsplashData resolves with the URL
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export default getWallpaper 
